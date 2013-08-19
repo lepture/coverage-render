@@ -30,7 +30,7 @@ function parse(data) {
   var cov = {
     instrumentation: "node-jscoverage",
     sloc: 0,
-    hits: 0
+    hits: 0,
     times: data.length
   };
 

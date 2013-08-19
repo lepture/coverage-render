@@ -1,0 +1,5816 @@
+[
+  {
+    "instrumentation": "node-jscoverage",
+    "sloc": 234,
+    "hits": 222,
+    "misses": 12,
+    "coverage": 94.87179487179486,
+    "files": [
+      {
+        "filename": "src/aspect.js",
+        "coverage": 100,
+        "hits": 28,
+        "misses": 0,
+        "sloc": 28,
+        "source": {
+          "1": {
+            "source": "define(function(require, exports) {",
+            "coverage": 1
+          },
+          "2": {
+            "source": "",
+            "coverage": ""
+          },
+          "3": {
+            "source": "  // Aspect",
+            "coverage": ""
+          },
+          "4": {
+            "source": "  // ---------------------",
+            "coverage": ""
+          },
+          "5": {
+            "source": "  // Thanks to:",
+            "coverage": ""
+          },
+          "6": {
+            "source": "  //  - http://yuilibrary.com/yui/docs/api/classes/Do.html",
+            "coverage": ""
+          },
+          "7": {
+            "source": "  //  - http://code.google.com/p/jquery-aop/",
+            "coverage": ""
+          },
+          "8": {
+            "source": "  //  - http://lazutkin.com/blog/2008/may/18/aop-aspect-javascript-dojo/",
+            "coverage": ""
+          },
+          "9": {
+            "source": "",
+            "coverage": ""
+          },
+          "10": {
+            "source": "",
+            "coverage": ""
+          },
+          "11": {
+            "source": "  // 在指定方法执行前，先执行 callback",
+            "coverage": ""
+          },
+          "12": {
+            "source": "  exports.before = function(methodName, callback, context) {",
+            "coverage": 1
+          },
+          "13": {
+            "source": "    return weave.call(this, 'before', methodName, callback, context);",
+            "coverage": 5
+          },
+          "14": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "15": {
+            "source": "",
+            "coverage": ""
+          },
+          "16": {
+            "source": "",
+            "coverage": ""
+          },
+          "17": {
+            "source": "  // 在指定方法执行后，再执行 callback",
+            "coverage": ""
+          },
+          "18": {
+            "source": "  exports.after = function(methodName, callback, context) {",
+            "coverage": 1
+          },
+          "19": {
+            "source": "    return weave.call(this, 'after', methodName, callback, context);",
+            "coverage": 5
+          },
+          "20": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "21": {
+            "source": "",
+            "coverage": ""
+          },
+          "22": {
+            "source": "",
+            "coverage": ""
+          },
+          "23": {
+            "source": "  // Helpers",
+            "coverage": ""
+          },
+          "24": {
+            "source": "  // -------",
+            "coverage": ""
+          },
+          "25": {
+            "source": "",
+            "coverage": ""
+          },
+          "26": {
+            "source": "  var eventSplitter = /\\s+/;",
+            "coverage": 1
+          },
+          "27": {
+            "source": "",
+            "coverage": ""
+          },
+          "28": {
+            "source": "  function weave(when, methodName, callback, context) {",
+            "coverage": ""
+          },
+          "29": {
+            "source": "    var names = methodName.split(eventSplitter);",
+            "coverage": 10
+          },
+          "30": {
+            "source": "    var name, method;",
+            "coverage": 10
+          },
+          "31": {
+            "source": "",
+            "coverage": ""
+          },
+          "32": {
+            "source": "    while (name = names.shift()) {",
+            "coverage": 10
+          },
+          "33": {
+            "source": "      method = getMethod(this, name);",
+            "coverage": 12
+          },
+          "34": {
+            "source": "      if (!method.__isAspected) {",
+            "coverage": 11
+          },
+          "35": {
+            "source": "        wrap.call(this, name);",
+            "coverage": 6
+          },
+          "36": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "37": {
+            "source": "      this.on(when + ':' + name, callback, context);",
+            "coverage": 11
+          },
+          "38": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "39": {
+            "source": "",
+            "coverage": ""
+          },
+          "40": {
+            "source": "    return this;",
+            "coverage": 9
+          },
+          "41": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "42": {
+            "source": "",
+            "coverage": ""
+          },
+          "43": {
+            "source": "",
+            "coverage": ""
+          },
+          "44": {
+            "source": "  function getMethod(host, methodName) {",
+            "coverage": ""
+          },
+          "45": {
+            "source": "    var method = host[methodName];",
+            "coverage": 12
+          },
+          "46": {
+            "source": "    if (!method) {",
+            "coverage": 12
+          },
+          "47": {
+            "source": "      throw new Error('Invalid method name: ' + methodName);",
+            "coverage": 1
+          },
+          "48": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "49": {
+            "source": "    return method;",
+            "coverage": 11
+          },
+          "50": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "51": {
+            "source": "",
+            "coverage": ""
+          },
+          "52": {
+            "source": "",
+            "coverage": ""
+          },
+          "53": {
+            "source": "  function wrap(methodName) {",
+            "coverage": ""
+          },
+          "54": {
+            "source": "    var old = this[methodName];",
+            "coverage": 6
+          },
+          "55": {
+            "source": "",
+            "coverage": ""
+          },
+          "56": {
+            "source": "    this[methodName] = function() {",
+            "coverage": 6
+          },
+          "57": {
+            "source": "      var args = Array.prototype.slice.call(arguments);",
+            "coverage": 9
+          },
+          "58": {
+            "source": "      var beforeArgs = ['before:' + methodName].concat(args);",
+            "coverage": 9
+          },
+          "59": {
+            "source": "",
+            "coverage": ""
+          },
+          "60": {
+            "source": "      // prevent if trigger return false",
+            "coverage": ""
+          },
+          "61": {
+            "source": "      if (this.trigger.apply(this, beforeArgs) === false) return;",
+            "coverage": 10
+          },
+          "62": {
+            "source": "",
+            "coverage": ""
+          },
+          "63": {
+            "source": "      var ret = old.apply(this, arguments);",
+            "coverage": 8
+          },
+          "64": {
+            "source": "      var afterArgs = ['after:' + methodName, ret].concat(args);",
+            "coverage": 8
+          },
+          "65": {
+            "source": "      this.trigger.apply(this, afterArgs);",
+            "coverage": 8
+          },
+          "66": {
+            "source": "",
+            "coverage": ""
+          },
+          "67": {
+            "source": "      return ret;",
+            "coverage": 8
+          },
+          "68": {
+            "source": "    };",
+            "coverage": ""
+          },
+          "69": {
+            "source": "",
+            "coverage": ""
+          },
+          "70": {
+            "source": "    this[methodName].__isAspected = true;",
+            "coverage": 6
+          },
+          "71": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "72": {
+            "source": "",
+            "coverage": ""
+          },
+          "73": {
+            "source": "});",
+            "coverage": ""
+          },
+          "74": {
+            "source": "",
+            "coverage": ""
+          }
+        }
+      },
+      {
+        "filename": "src/attribute.js",
+        "coverage": 93.58288770053476,
+        "hits": 175,
+        "misses": 12,
+        "sloc": 187,
+        "source": {
+          "1": {
+            "source": "define(function(require, exports) {",
+            "coverage": 1
+          },
+          "2": {
+            "source": "",
+            "coverage": ""
+          },
+          "3": {
+            "source": "  // Attribute",
+            "coverage": ""
+          },
+          "4": {
+            "source": "  // -----------------",
+            "coverage": ""
+          },
+          "5": {
+            "source": "  // Thanks to:",
+            "coverage": ""
+          },
+          "6": {
+            "source": "  //  - http://documentcloud.github.com/backbone/#Model",
+            "coverage": ""
+          },
+          "7": {
+            "source": "  //  - http://yuilibrary.com/yui/docs/api/classes/AttributeCore.html",
+            "coverage": ""
+          },
+          "8": {
+            "source": "  //  - https://github.com/berzniz/backbone.getters.setters",
+            "coverage": ""
+          },
+          "9": {
+            "source": "",
+            "coverage": ""
+          },
+          "10": {
+            "source": "",
+            "coverage": ""
+          },
+          "11": {
+            "source": "  // 负责 attributes 的初始化",
+            "coverage": ""
+          },
+          "12": {
+            "source": "  // attributes 是与实例相关的状态信息，可读可写，发生变化时，会自动触发相关事件",
+            "coverage": ""
+          },
+          "13": {
+            "source": "  exports.initAttrs = function(config) {",
+            "coverage": 1
+          },
+          "14": {
+            "source": "    // initAttrs 是在初始化时调用的，默认情况下实例上肯定没有 attrs，不存在覆盖问题",
+            "coverage": ""
+          },
+          "15": {
+            "source": "    var attrs = this.attrs = {};",
+            "coverage": 34
+          },
+          "16": {
+            "source": "",
+            "coverage": ""
+          },
+          "17": {
+            "source": "    // Get all inherited attributes.",
+            "coverage": ""
+          },
+          "18": {
+            "source": "    var specialProps = this.propsInAttrs || [];",
+            "coverage": 34
+          },
+          "19": {
+            "source": "    mergeInheritedAttrs(attrs, this, specialProps);",
+            "coverage": 34
+          },
+          "20": {
+            "source": "",
+            "coverage": ""
+          },
+          "21": {
+            "source": "    // Merge user-specific attributes from config.",
+            "coverage": ""
+          },
+          "22": {
+            "source": "    if (config) {",
+            "coverage": 34
+          },
+          "23": {
+            "source": "      mergeUserValue(attrs, config);",
+            "coverage": 19
+          },
+          "24": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "25": {
+            "source": "",
+            "coverage": ""
+          },
+          "26": {
+            "source": "    // 对于有 setter 的属性，要用初始值 set 一下，以保证关联属性也一同初始化",
+            "coverage": ""
+          },
+          "27": {
+            "source": "    setSetterAttrs(this, attrs, config);",
+            "coverage": 34
+          },
+          "28": {
+            "source": "",
+            "coverage": ""
+          },
+          "29": {
+            "source": "    // Convert `on/before/afterXxx` config to event handler.",
+            "coverage": ""
+          },
+          "30": {
+            "source": "    parseEventsFromAttrs(this, attrs);",
+            "coverage": 34
+          },
+          "31": {
+            "source": "",
+            "coverage": ""
+          },
+          "32": {
+            "source": "    // 将 this.attrs 上的 special properties 放回 this 上",
+            "coverage": ""
+          },
+          "33": {
+            "source": "    copySpecialProps(specialProps, this, attrs, true);",
+            "coverage": 34
+          },
+          "34": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "35": {
+            "source": "",
+            "coverage": ""
+          },
+          "36": {
+            "source": "",
+            "coverage": ""
+          },
+          "37": {
+            "source": "  // Get the value of an attribute.",
+            "coverage": ""
+          },
+          "38": {
+            "source": "  exports.get = function(key) {",
+            "coverage": 1
+          },
+          "39": {
+            "source": "    var attr = this.attrs[key] || {};",
+            "coverage": 129
+          },
+          "40": {
+            "source": "    var val = attr.value;",
+            "coverage": 129
+          },
+          "41": {
+            "source": "    return attr.getter ? attr.getter.call(this, val, key) : val;",
+            "coverage": 129
+          },
+          "42": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "43": {
+            "source": "",
+            "coverage": ""
+          },
+          "44": {
+            "source": "",
+            "coverage": ""
+          },
+          "45": {
+            "source": "  // Set a hash of model attributes on the object, firing `\"change\"` unless",
+            "coverage": ""
+          },
+          "46": {
+            "source": "  // you choose to silence it.",
+            "coverage": ""
+          },
+          "47": {
+            "source": "  exports.set = function(key, val, options) {",
+            "coverage": 1
+          },
+          "48": {
+            "source": "    var attrs = {};",
+            "coverage": 48
+          },
+          "49": {
+            "source": "",
+            "coverage": ""
+          },
+          "50": {
+            "source": "    // set(\"key\", val, options)",
+            "coverage": ""
+          },
+          "51": {
+            "source": "    if (isString(key)) {",
+            "coverage": 48
+          },
+          "52": {
+            "source": "      attrs[key] = val;",
+            "coverage": 47
+          },
+          "53": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "54": {
+            "source": "    // set({ \"key\": val, \"key2\": val2 }, options)",
+            "coverage": ""
+          },
+          "55": {
+            "source": "    else {",
+            "coverage": ""
+          },
+          "56": {
+            "source": "      attrs = key;",
+            "coverage": 1
+          },
+          "57": {
+            "source": "      options = val;",
+            "coverage": 1
+          },
+          "58": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "59": {
+            "source": "",
+            "coverage": ""
+          },
+          "60": {
+            "source": "    options || (options = {});",
+            "coverage": 48
+          },
+          "61": {
+            "source": "    var silent = options.silent;",
+            "coverage": 48
+          },
+          "62": {
+            "source": "    var override = options.override;",
+            "coverage": 48
+          },
+          "63": {
+            "source": "",
+            "coverage": ""
+          },
+          "64": {
+            "source": "    var now = this.attrs;",
+            "coverage": 48
+          },
+          "65": {
+            "source": "    var changed = this.__changedAttrs || (this.__changedAttrs = {});",
+            "coverage": 48
+          },
+          "66": {
+            "source": "",
+            "coverage": ""
+          },
+          "67": {
+            "source": "    for (key in attrs) {",
+            "coverage": 48
+          },
+          "68": {
+            "source": "      if (!attrs.hasOwnProperty(key)) continue;",
+            "coverage": 50
+          },
+          "69": {
+            "source": "",
+            "coverage": ""
+          },
+          "70": {
+            "source": "      var attr = now[key] || (now[key] = {});",
+            "coverage": 50
+          },
+          "71": {
+            "source": "      val = attrs[key];",
+            "coverage": 50
+          },
+          "72": {
+            "source": "",
+            "coverage": ""
+          },
+          "73": {
+            "source": "      if (attr.readOnly) {",
+            "coverage": 50
+          },
+          "74": {
+            "source": "        throw new Error('This attribute is readOnly: ' + key);",
+            "coverage": 1
+          },
+          "75": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "76": {
+            "source": "",
+            "coverage": ""
+          },
+          "77": {
+            "source": "      // invoke setter",
+            "coverage": ""
+          },
+          "78": {
+            "source": "      if (attr.setter) {",
+            "coverage": 49
+          },
+          "79": {
+            "source": "        val = attr.setter.call(this, val, key);",
+            "coverage": 6
+          },
+          "80": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "81": {
+            "source": "",
+            "coverage": ""
+          },
+          "82": {
+            "source": "      // 获取设置前的 prev 值",
+            "coverage": ""
+          },
+          "83": {
+            "source": "      var prev = this.get(key);",
+            "coverage": 49
+          },
+          "84": {
+            "source": "",
+            "coverage": ""
+          },
+          "85": {
+            "source": "      // 获取需要设置的 val 值",
+            "coverage": ""
+          },
+          "86": {
+            "source": "      // 如果设置了 override 为 true，表示要强制覆盖，就不去 merge 了",
+            "coverage": ""
+          },
+          "87": {
+            "source": "      // 都为对象时，做 merge 操作，以保留 prev 上没有覆盖的值",
+            "coverage": ""
+          },
+          "88": {
+            "source": "      if (!override && isPlainObject(prev) && isPlainObject(val)) {",
+            "coverage": 49
+          },
+          "89": {
+            "source": "        val = merge(merge({}, prev), val);",
+            "coverage": 1
+          },
+          "90": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "91": {
+            "source": "",
+            "coverage": ""
+          },
+          "92": {
+            "source": "      // set finally",
+            "coverage": ""
+          },
+          "93": {
+            "source": "      now[key].value = val;",
+            "coverage": 49
+          },
+          "94": {
+            "source": "",
+            "coverage": ""
+          },
+          "95": {
+            "source": "      // invoke change event",
+            "coverage": ""
+          },
+          "96": {
+            "source": "      // 初始化时对 set 的调用，不触发任何事件",
+            "coverage": ""
+          },
+          "97": {
+            "source": "      if (!this.__initializingAttrs && !isEqual(prev, val)) {",
+            "coverage": 49
+          },
+          "98": {
+            "source": "        if (silent) {",
+            "coverage": 28
+          },
+          "99": {
+            "source": "          changed[key] = [val, prev];",
+            "coverage": 3
+          },
+          "100": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "101": {
+            "source": "        else {",
+            "coverage": ""
+          },
+          "102": {
+            "source": "          this.trigger('change:' + key, val, prev, key);",
+            "coverage": 25
+          },
+          "103": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "104": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "105": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "106": {
+            "source": "",
+            "coverage": ""
+          },
+          "107": {
+            "source": "    return this;",
+            "coverage": 47
+          },
+          "108": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "109": {
+            "source": "",
+            "coverage": ""
+          },
+          "110": {
+            "source": "",
+            "coverage": ""
+          },
+          "111": {
+            "source": "  // Call this method to manually fire a `\"change\"` event for triggering",
+            "coverage": ""
+          },
+          "112": {
+            "source": "  // a `\"change:attribute\"` event for each changed attribute.",
+            "coverage": ""
+          },
+          "113": {
+            "source": "  exports.change = function() {",
+            "coverage": 1
+          },
+          "114": {
+            "source": "    var changed = this.__changedAttrs;",
+            "coverage": 3
+          },
+          "115": {
+            "source": "",
+            "coverage": ""
+          },
+          "116": {
+            "source": "    if (changed) {",
+            "coverage": 3
+          },
+          "117": {
+            "source": "      for (var key in changed) {",
+            "coverage": 2
+          },
+          "118": {
+            "source": "        if (changed.hasOwnProperty(key)) {",
+            "coverage": 1
+          },
+          "119": {
+            "source": "          var args = changed[key];",
+            "coverage": 1
+          },
+          "120": {
+            "source": "          this.trigger('change:' + key, args[0], args[1], key);",
+            "coverage": 1
+          },
+          "121": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "122": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "123": {
+            "source": "      delete this.__changedAttrs;",
+            "coverage": 2
+          },
+          "124": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "125": {
+            "source": "",
+            "coverage": ""
+          },
+          "126": {
+            "source": "    return this;",
+            "coverage": 3
+          },
+          "127": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "128": {
+            "source": "",
+            "coverage": ""
+          },
+          "129": {
+            "source": "  // for test",
+            "coverage": ""
+          },
+          "130": {
+            "source": "  exports._isPlainObject = isPlainObject;",
+            "coverage": 1
+          },
+          "131": {
+            "source": "",
+            "coverage": ""
+          },
+          "132": {
+            "source": "  // Helpers",
+            "coverage": ""
+          },
+          "133": {
+            "source": "  // -------",
+            "coverage": ""
+          },
+          "134": {
+            "source": "",
+            "coverage": ""
+          },
+          "135": {
+            "source": "  var toString = Object.prototype.toString;",
+            "coverage": 1
+          },
+          "136": {
+            "source": "  var hasOwn = Object.prototype.hasOwnProperty;",
+            "coverage": 1
+          },
+          "137": {
+            "source": "",
+            "coverage": ""
+          },
+          "138": {
+            "source": "  /**",
+            "coverage": ""
+          },
+          "139": {
+            "source": "   * Detect the JScript [[DontEnum]] bug:",
+            "coverage": ""
+          },
+          "140": {
+            "source": "   * In IE < 9 an objects own properties, shadowing non-enumerable ones, are",
+            "coverage": ""
+          },
+          "141": {
+            "source": "   * made non-enumerable as well.",
+            "coverage": ""
+          },
+          "142": {
+            "source": "   * https://github.com/bestiejs/lodash/blob/7520066fc916e205ef84cb97fbfe630d7c154158/lodash.js#L134-L144",
+            "coverage": ""
+          },
+          "143": {
+            "source": "   */",
+            "coverage": ""
+          },
+          "144": {
+            "source": "  /** Detect if own properties are iterated after inherited properties (IE < 9) */",
+            "coverage": ""
+          },
+          "145": {
+            "source": "  var iteratesOwnLast;",
+            "coverage": 1
+          },
+          "146": {
+            "source": "  (function() {",
+            "coverage": 1
+          },
+          "147": {
+            "source": "    var props = [];",
+            "coverage": 1
+          },
+          "148": {
+            "source": "    function Ctor() { this.x = 1; }",
+            "coverage": 1
+          },
+          "149": {
+            "source": "    Ctor.prototype = { 'valueOf': 1, 'y': 1 };",
+            "coverage": 1
+          },
+          "150": {
+            "source": "    for (var prop in new Ctor()) { props.push(prop); }",
+            "coverage": 4
+          },
+          "151": {
+            "source": "    iteratesOwnLast = props[0] !== 'x';",
+            "coverage": 1
+          },
+          "152": {
+            "source": "  }());",
+            "coverage": ""
+          },
+          "153": {
+            "source": "",
+            "coverage": ""
+          },
+          "154": {
+            "source": "  var isArray = Array.isArray || function(val) {",
+            "coverage": 1
+          },
+          "155": {
+            "source": "    return toString.call(val) === '[object Array]';",
+            "coverage": 1
+          },
+          "156": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "157": {
+            "source": "",
+            "coverage": ""
+          },
+          "158": {
+            "source": "  function isString(val) {",
+            "coverage": ""
+          },
+          "159": {
+            "source": "    return toString.call(val) === '[object String]';",
+            "coverage": 90
+          },
+          "160": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "161": {
+            "source": "",
+            "coverage": ""
+          },
+          "162": {
+            "source": "  function isFunction(val) {",
+            "coverage": ""
+          },
+          "163": {
+            "source": "    return toString.call(val) === '[object Function]';",
+            "coverage": 65
+          },
+          "164": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "165": {
+            "source": "",
+            "coverage": ""
+          },
+          "166": {
+            "source": "  function isWindow(o) {",
+            "coverage": ""
+          },
+          "167": {
+            "source": "    return o != null && o == o.window;",
+            "coverage": 170
+          },
+          "168": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "169": {
+            "source": "",
+            "coverage": ""
+          },
+          "170": {
+            "source": "  function isPlainObject(o) {",
+            "coverage": ""
+          },
+          "171": {
+            "source": "    // Must be an Object.",
+            "coverage": ""
+          },
+          "172": {
+            "source": "    // Because of IE, we also have to check the presence of the constructor",
+            "coverage": ""
+          },
+          "173": {
+            "source": "    // property. Make sure that DOM nodes and window objects don't",
+            "coverage": ""
+          },
+          "174": {
+            "source": "    // pass through, as well",
+            "coverage": ""
+          },
+          "175": {
+            "source": "    if (!o || toString.call(o) !== \"[object Object]\" ||",
+            "coverage": 247
+          },
+          "176": {
+            "source": "        o.nodeType || isWindow(o)) {",
+            "coverage": ""
+          },
+          "177": {
+            "source": "      return false;",
+            "coverage": 194
+          },
+          "178": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "179": {
+            "source": "",
+            "coverage": ""
+          },
+          "180": {
+            "source": "    try {",
+            "coverage": 53
+          },
+          "181": {
+            "source": "      // Not own constructor property must be Object",
+            "coverage": ""
+          },
+          "182": {
+            "source": "      if (o.constructor &&",
+            "coverage": 53
+          },
+          "183": {
+            "source": "          !hasOwn.call(o, \"constructor\") &&",
+            "coverage": ""
+          },
+          "184": {
+            "source": "          !hasOwn.call(o.constructor.prototype, \"isPrototypeOf\")) {",
+            "coverage": ""
+          },
+          "185": {
+            "source": "        return false;",
+            "coverage": 2
+          },
+          "186": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "187": {
+            "source": "    } catch (e) {",
+            "coverage": ""
+          },
+          "188": {
+            "source": "      // IE8,9 Will throw exceptions on certain host objects #9897",
+            "coverage": ""
+          },
+          "189": {
+            "source": "      return false;",
+            "coverage": 0
+          },
+          "190": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "191": {
+            "source": "",
+            "coverage": ""
+          },
+          "192": {
+            "source": "    var key;",
+            "coverage": 51
+          },
+          "193": {
+            "source": "",
+            "coverage": ""
+          },
+          "194": {
+            "source": "    // Support: IE<9",
+            "coverage": ""
+          },
+          "195": {
+            "source": "    // Handle iteration over inherited properties before own properties.",
+            "coverage": ""
+          },
+          "196": {
+            "source": "    // http://bugs.jquery.com/ticket/12199",
+            "coverage": ""
+          },
+          "197": {
+            "source": "    if (iteratesOwnLast) {",
+            "coverage": 51
+          },
+          "198": {
+            "source": "      for (key in o) {",
+            "coverage": 0
+          },
+          "199": {
+            "source": "        return hasOwn.call(o, key);",
+            "coverage": 0
+          },
+          "200": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "201": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "202": {
+            "source": "",
+            "coverage": ""
+          },
+          "203": {
+            "source": "    // Own properties are enumerated firstly, so to speed up,",
+            "coverage": ""
+          },
+          "204": {
+            "source": "    // if last one is own, then all properties are own.",
+            "coverage": ""
+          },
+          "205": {
+            "source": "    for (key in o) {}",
+            "coverage": 51
+          },
+          "206": {
+            "source": "",
+            "coverage": ""
+          },
+          "207": {
+            "source": "    return key === undefined || hasOwn.call(o, key);",
+            "coverage": 51
+          },
+          "208": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "209": {
+            "source": "",
+            "coverage": ""
+          },
+          "210": {
+            "source": "  function isEmptyObject(o) {",
+            "coverage": ""
+          },
+          "211": {
+            "source": "    if (!o || toString.call(o) !== \"[object Object]\" ||",
+            "coverage": 143
+          },
+          "212": {
+            "source": "        o.nodeType || isWindow(o) || !o.hasOwnProperty) {",
+            "coverage": ""
+          },
+          "213": {
+            "source": "      return false;",
+            "coverage": 26
+          },
+          "214": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "215": {
+            "source": "",
+            "coverage": ""
+          },
+          "216": {
+            "source": "    for (var p in o) {",
+            "coverage": 117
+          },
+          "217": {
+            "source": "      if (o.hasOwnProperty(p)) return false;",
+            "coverage": 76
+          },
+          "218": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "219": {
+            "source": "    return true;",
+            "coverage": 79
+          },
+          "220": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "221": {
+            "source": "",
+            "coverage": ""
+          },
+          "222": {
+            "source": "  function merge(receiver, supplier) {",
+            "coverage": ""
+          },
+          "223": {
+            "source": "    var key, value;",
+            "coverage": 17
+          },
+          "224": {
+            "source": "",
+            "coverage": ""
+          },
+          "225": {
+            "source": "    for (key in supplier) {",
+            "coverage": 17
+          },
+          "226": {
+            "source": "      if (supplier.hasOwnProperty(key)) {",
+            "coverage": 28
+          },
+          "227": {
+            "source": "        receiver[key] = cloneValue(supplier[key], receiver[key]);",
+            "coverage": 28
+          },
+          "228": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "229": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "230": {
+            "source": "",
+            "coverage": ""
+          },
+          "231": {
+            "source": "    return receiver;",
+            "coverage": 17
+          },
+          "232": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "233": {
+            "source": "",
+            "coverage": ""
+          },
+          "234": {
+            "source": "  // 只 clone 数组和 plain object，其他的保持不变",
+            "coverage": ""
+          },
+          "235": {
+            "source": "  function cloneValue(value, prev){",
+            "coverage": ""
+          },
+          "236": {
+            "source": "    if (isArray(value)) {",
+            "coverage": 120
+          },
+          "237": {
+            "source": "      value = value.slice();",
+            "coverage": 9
+          },
+          "238": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "239": {
+            "source": "    else if (isPlainObject(value)) {",
+            "coverage": 111
+          },
+          "240": {
+            "source": "      isPlainObject(prev) || (prev = {});",
+            "coverage": 15
+          },
+          "241": {
+            "source": "",
+            "coverage": ""
+          },
+          "242": {
+            "source": "      value = merge(prev, value);",
+            "coverage": 15
+          },
+          "243": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "244": {
+            "source": "",
+            "coverage": ""
+          },
+          "245": {
+            "source": "    return value;",
+            "coverage": 120
+          },
+          "246": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "247": {
+            "source": "",
+            "coverage": ""
+          },
+          "248": {
+            "source": "  var keys = Object.keys;",
+            "coverage": 1
+          },
+          "249": {
+            "source": "",
+            "coverage": ""
+          },
+          "250": {
+            "source": "  if (!keys) {",
+            "coverage": 1
+          },
+          "251": {
+            "source": "    keys = function(o) {",
+            "coverage": 0
+          },
+          "252": {
+            "source": "      var result = [];",
+            "coverage": 0
+          },
+          "253": {
+            "source": "",
+            "coverage": ""
+          },
+          "254": {
+            "source": "      for (var name in o) {",
+            "coverage": 0
+          },
+          "255": {
+            "source": "        if (o.hasOwnProperty(name)) {",
+            "coverage": 0
+          },
+          "256": {
+            "source": "          result.push(name);",
+            "coverage": 0
+          },
+          "257": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "258": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "259": {
+            "source": "      return result;",
+            "coverage": 0
+          },
+          "260": {
+            "source": "    };",
+            "coverage": ""
+          },
+          "261": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "262": {
+            "source": "",
+            "coverage": ""
+          },
+          "263": {
+            "source": "  function mergeInheritedAttrs(attrs, instance, specialProps) {",
+            "coverage": ""
+          },
+          "264": {
+            "source": "    var inherited = [];",
+            "coverage": 34
+          },
+          "265": {
+            "source": "    var proto = instance.constructor.prototype;",
+            "coverage": 34
+          },
+          "266": {
+            "source": "",
+            "coverage": ""
+          },
+          "267": {
+            "source": "    while (proto) {",
+            "coverage": 34
+          },
+          "268": {
+            "source": "      // 不要拿到 prototype 上的",
+            "coverage": ""
+          },
+          "269": {
+            "source": "      if (!proto.hasOwnProperty('attrs')) {",
+            "coverage": 108
+          },
+          "270": {
+            "source": "        proto.attrs = {};",
+            "coverage": 9
+          },
+          "271": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "272": {
+            "source": "",
+            "coverage": ""
+          },
+          "273": {
+            "source": "      // 将 proto 上的特殊 properties 放到 proto.attrs 上，以便合并",
+            "coverage": ""
+          },
+          "274": {
+            "source": "      copySpecialProps(specialProps, proto.attrs, proto);",
+            "coverage": 108
+          },
+          "275": {
+            "source": "",
+            "coverage": ""
+          },
+          "276": {
+            "source": "      // 为空时不添加",
+            "coverage": ""
+          },
+          "277": {
+            "source": "      if (!isEmptyObject(proto.attrs)) {",
+            "coverage": 108
+          },
+          "278": {
+            "source": "        inherited.unshift(proto.attrs);",
+            "coverage": 34
+          },
+          "279": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "280": {
+            "source": "",
+            "coverage": ""
+          },
+          "281": {
+            "source": "      // 向上回溯一级",
+            "coverage": ""
+          },
+          "282": {
+            "source": "      proto = proto.constructor.superclass;",
+            "coverage": 108
+          },
+          "283": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "284": {
+            "source": "",
+            "coverage": ""
+          },
+          "285": {
+            "source": "    // Merge and clone default values to instance.",
+            "coverage": ""
+          },
+          "286": {
+            "source": "    for (var i = 0, len = inherited.length; i < len; i++) {",
+            "coverage": 34
+          },
+          "287": {
+            "source": "      mergeAttrs(attrs, normalize(inherited[i]));",
+            "coverage": 34
+          },
+          "288": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "289": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "290": {
+            "source": "",
+            "coverage": ""
+          },
+          "291": {
+            "source": "  function mergeUserValue(attrs, config) {",
+            "coverage": ""
+          },
+          "292": {
+            "source": "    mergeAttrs(attrs, normalize(config, true), true);",
+            "coverage": 19
+          },
+          "293": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "294": {
+            "source": "",
+            "coverage": ""
+          },
+          "295": {
+            "source": "  function copySpecialProps(specialProps, receiver, supplier, isAttr2Prop) {",
+            "coverage": ""
+          },
+          "296": {
+            "source": "    for (var i = 0, len = specialProps.length; i < len; i++) {",
+            "coverage": 142
+          },
+          "297": {
+            "source": "      var key = specialProps[i];",
+            "coverage": 4
+          },
+          "298": {
+            "source": "",
+            "coverage": ""
+          },
+          "299": {
+            "source": "      if (supplier.hasOwnProperty(key)) {",
+            "coverage": 4
+          },
+          "300": {
+            "source": "        receiver[key] = isAttr2Prop ? receiver.get(key) : supplier[key];",
+            "coverage": 2
+          },
+          "301": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "302": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "303": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "304": {
+            "source": "",
+            "coverage": ""
+          },
+          "305": {
+            "source": "",
+            "coverage": ""
+          },
+          "306": {
+            "source": "  var EVENT_PATTERN = /^(on|before|after)([A-Z].*)$/;",
+            "coverage": 1
+          },
+          "307": {
+            "source": "  var EVENT_NAME_PATTERN = /^(Change)?([A-Z])(.*)/;",
+            "coverage": 1
+          },
+          "308": {
+            "source": "",
+            "coverage": ""
+          },
+          "309": {
+            "source": "  function parseEventsFromAttrs(host, attrs) {",
+            "coverage": ""
+          },
+          "310": {
+            "source": "    for (var key in attrs) {",
+            "coverage": 34
+          },
+          "311": {
+            "source": "      if (attrs.hasOwnProperty(key)) {",
+            "coverage": 65
+          },
+          "312": {
+            "source": "        var value = attrs[key].value, m;",
+            "coverage": 65
+          },
+          "313": {
+            "source": "",
+            "coverage": ""
+          },
+          "314": {
+            "source": "        if (isFunction(value) && (m = key.match(EVENT_PATTERN))) {",
+            "coverage": 65
+          },
+          "315": {
+            "source": "          host[m[1]](getEventName(m[2]), value);",
+            "coverage": 4
+          },
+          "316": {
+            "source": "          delete attrs[key];",
+            "coverage": 4
+          },
+          "317": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "318": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "319": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "320": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "321": {
+            "source": "",
+            "coverage": ""
+          },
+          "322": {
+            "source": "  // Converts `Show` to `show` and `ChangeTitle` to `change:title`",
+            "coverage": ""
+          },
+          "323": {
+            "source": "  function getEventName(name) {",
+            "coverage": ""
+          },
+          "324": {
+            "source": "    var m = name.match(EVENT_NAME_PATTERN);",
+            "coverage": 4
+          },
+          "325": {
+            "source": "    var ret = m[1] ? 'change:' : '';",
+            "coverage": 4
+          },
+          "326": {
+            "source": "    ret += m[2].toLowerCase() + m[3];",
+            "coverage": 4
+          },
+          "327": {
+            "source": "    return ret;",
+            "coverage": 4
+          },
+          "328": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "329": {
+            "source": "",
+            "coverage": ""
+          },
+          "330": {
+            "source": "",
+            "coverage": ""
+          },
+          "331": {
+            "source": "  function setSetterAttrs(host, attrs, config) {",
+            "coverage": ""
+          },
+          "332": {
+            "source": "    var options = { silent: true };",
+            "coverage": 34
+          },
+          "333": {
+            "source": "    host.__initializingAttrs = true;",
+            "coverage": 34
+          },
+          "334": {
+            "source": "",
+            "coverage": ""
+          },
+          "335": {
+            "source": "    for (var key in config) {",
+            "coverage": 34
+          },
+          "336": {
+            "source": "      if (config.hasOwnProperty(key)) {",
+            "coverage": 36
+          },
+          "337": {
+            "source": "        if (attrs[key].setter) {",
+            "coverage": 36
+          },
+          "338": {
+            "source": "          host.set(key, config[key], options);",
+            "coverage": 4
+          },
+          "339": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "340": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "341": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "342": {
+            "source": "",
+            "coverage": ""
+          },
+          "343": {
+            "source": "    delete host.__initializingAttrs;",
+            "coverage": 34
+          },
+          "344": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "345": {
+            "source": "",
+            "coverage": ""
+          },
+          "346": {
+            "source": "",
+            "coverage": ""
+          },
+          "347": {
+            "source": "  var ATTR_SPECIAL_KEYS = ['value', 'getter', 'setter', 'readOnly'];",
+            "coverage": 1
+          },
+          "348": {
+            "source": "",
+            "coverage": ""
+          },
+          "349": {
+            "source": "  // normalize `attrs` to",
+            "coverage": ""
+          },
+          "350": {
+            "source": "  //",
+            "coverage": ""
+          },
+          "351": {
+            "source": "  //   {",
+            "coverage": ""
+          },
+          "352": {
+            "source": "  //      value: 'xx',",
+            "coverage": ""
+          },
+          "353": {
+            "source": "  //      getter: fn,",
+            "coverage": ""
+          },
+          "354": {
+            "source": "  //      setter: fn,",
+            "coverage": ""
+          },
+          "355": {
+            "source": "  //      readOnly: boolean",
+            "coverage": ""
+          },
+          "356": {
+            "source": "  //   }",
+            "coverage": ""
+          },
+          "357": {
+            "source": "  //",
+            "coverage": ""
+          },
+          "358": {
+            "source": "  function normalize(attrs, isUserValue) {",
+            "coverage": ""
+          },
+          "359": {
+            "source": "    var newAttrs = {};",
+            "coverage": 53
+          },
+          "360": {
+            "source": "",
+            "coverage": ""
+          },
+          "361": {
+            "source": "    for (var key in attrs) {",
+            "coverage": 53
+          },
+          "362": {
+            "source": "      var attr = attrs[key];",
+            "coverage": 99
+          },
+          "363": {
+            "source": "",
+            "coverage": ""
+          },
+          "364": {
+            "source": "      if (!isUserValue &&",
+            "coverage": 99
+          },
+          "365": {
+            "source": "          isPlainObject(attr) &&",
+            "coverage": ""
+          },
+          "366": {
+            "source": "          hasOwnProperties(attr, ATTR_SPECIAL_KEYS)) {",
+            "coverage": ""
+          },
+          "367": {
+            "source": "        newAttrs[key] = attr;",
+            "coverage": 11
+          },
+          "368": {
+            "source": "        continue;",
+            "coverage": 11
+          },
+          "369": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "370": {
+            "source": "",
+            "coverage": ""
+          },
+          "371": {
+            "source": "      newAttrs[key] = {",
+            "coverage": 88
+          },
+          "372": {
+            "source": "        value: attr",
+            "coverage": ""
+          },
+          "373": {
+            "source": "      };",
+            "coverage": ""
+          },
+          "374": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "375": {
+            "source": "",
+            "coverage": ""
+          },
+          "376": {
+            "source": "    return newAttrs;",
+            "coverage": 53
+          },
+          "377": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "378": {
+            "source": "",
+            "coverage": ""
+          },
+          "379": {
+            "source": "  var ATTR_OPTIONS = ['setter', 'getter', 'readOnly'];",
+            "coverage": 1
+          },
+          "380": {
+            "source": "  // 专用于 attrs 的 merge 方法",
+            "coverage": ""
+          },
+          "381": {
+            "source": "  function mergeAttrs(attrs, inheritedAttrs, isUserValue){",
+            "coverage": ""
+          },
+          "382": {
+            "source": "    var key, value;",
+            "coverage": 53
+          },
+          "383": {
+            "source": "    var attr;",
+            "coverage": 53
+          },
+          "384": {
+            "source": "",
+            "coverage": ""
+          },
+          "385": {
+            "source": "    for (key in inheritedAttrs) {",
+            "coverage": 53
+          },
+          "386": {
+            "source": "      if (inheritedAttrs.hasOwnProperty(key)) {",
+            "coverage": 99
+          },
+          "387": {
+            "source": "        value = inheritedAttrs[key];",
+            "coverage": 99
+          },
+          "388": {
+            "source": "        attr = attrs[key];",
+            "coverage": 99
+          },
+          "389": {
+            "source": "",
+            "coverage": ""
+          },
+          "390": {
+            "source": "        if (!attr) {",
+            "coverage": 99
+          },
+          "391": {
+            "source": "          attr = attrs[key] = {};",
+            "coverage": 65
+          },
+          "392": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "393": {
+            "source": "",
+            "coverage": ""
+          },
+          "394": {
+            "source": "        // 从严谨上来说，遍历 ATTR_SPECIAL_KEYS 更好",
+            "coverage": ""
+          },
+          "395": {
+            "source": "        // 从性能来说，直接 人肉赋值 更快",
+            "coverage": ""
+          },
+          "396": {
+            "source": "        // 这里还是选择 性能优先",
+            "coverage": ""
+          },
+          "397": {
+            "source": "",
+            "coverage": ""
+          },
+          "398": {
+            "source": "        // 只有 value 要复制原值，其他的直接覆盖即可",
+            "coverage": ""
+          },
+          "399": {
+            "source": "        (value['value'] !== undefined) && (attr['value'] = cloneValue(value['value'], attr['value']));",
+            "coverage": 99
+          },
+          "400": {
+            "source": "",
+            "coverage": ""
+          },
+          "401": {
+            "source": "        // 如果是用户赋值，只要考虑value",
+            "coverage": ""
+          },
+          "402": {
+            "source": "        if (isUserValue) continue;",
+            "coverage": 135
+          },
+          "403": {
+            "source": "",
+            "coverage": ""
+          },
+          "404": {
+            "source": "        for (var i in ATTR_OPTIONS) {",
+            "coverage": 63
+          },
+          "405": {
+            "source": "          var option = ATTR_OPTIONS[i];",
+            "coverage": 189
+          },
+          "406": {
+            "source": "          if (value[option] !== undefined) {",
+            "coverage": 189
+          },
+          "407": {
+            "source": "            attr[option] = value[option];",
+            "coverage": 14
+          },
+          "408": {
+            "source": "          }",
+            "coverage": ""
+          },
+          "409": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "410": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "411": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "412": {
+            "source": "",
+            "coverage": ""
+          },
+          "413": {
+            "source": "    return attrs;",
+            "coverage": 53
+          },
+          "414": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "415": {
+            "source": "",
+            "coverage": ""
+          },
+          "416": {
+            "source": "  function hasOwnProperties(object, properties) {",
+            "coverage": ""
+          },
+          "417": {
+            "source": "    for (var i = 0, len = properties.length; i < len; i++) {",
+            "coverage": 18
+          },
+          "418": {
+            "source": "      if (object.hasOwnProperty(properties[i])) {",
+            "coverage": 47
+          },
+          "419": {
+            "source": "        return true;",
+            "coverage": 11
+          },
+          "420": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "421": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "422": {
+            "source": "    return false;",
+            "coverage": 7
+          },
+          "423": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "424": {
+            "source": "",
+            "coverage": ""
+          },
+          "425": {
+            "source": "",
+            "coverage": ""
+          },
+          "426": {
+            "source": "  // 对于 attrs 的 value 来说，以下值都认为是空值： null, undefined, '', [], {}",
+            "coverage": ""
+          },
+          "427": {
+            "source": "  function isEmptyAttrValue(o) {",
+            "coverage": ""
+          },
+          "428": {
+            "source": "    return o == null || // null, undefined",
+            "coverage": 45
+          },
+          "429": {
+            "source": "        (isString(o) || isArray(o)) && o.length === 0 || // '', []",
+            "coverage": ""
+          },
+          "430": {
+            "source": "        isEmptyObject(o); // {}",
+            "coverage": ""
+          },
+          "431": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "432": {
+            "source": "",
+            "coverage": ""
+          },
+          "433": {
+            "source": "  // 判断属性值 a 和 b 是否相等，注意仅适用于属性值的判断，非普适的 === 或 == 判断。",
+            "coverage": ""
+          },
+          "434": {
+            "source": "  function isEqual(a, b) {",
+            "coverage": ""
+          },
+          "435": {
+            "source": "    if (a === b) return true;",
+            "coverage": 46
+          },
+          "436": {
+            "source": "",
+            "coverage": ""
+          },
+          "437": {
+            "source": "    if (isEmptyAttrValue(a) && isEmptyAttrValue(b)) return true;",
+            "coverage": 42
+          },
+          "438": {
+            "source": "",
+            "coverage": ""
+          },
+          "439": {
+            "source": "    // Compare `[[Class]]` names.",
+            "coverage": ""
+          },
+          "440": {
+            "source": "    var className = toString.call(a);",
+            "coverage": 30
+          },
+          "441": {
+            "source": "    if (className != toString.call(b)) return false;",
+            "coverage": 39
+          },
+          "442": {
+            "source": "",
+            "coverage": ""
+          },
+          "443": {
+            "source": "    switch (className) {",
+            "coverage": 21
+          },
+          "444": {
+            "source": "",
+            "coverage": ""
+          },
+          "445": {
+            "source": "      // Strings, numbers, dates, and booleans are compared by value.",
+            "coverage": ""
+          },
+          "446": {
+            "source": "      case '[object String]':",
+            "coverage": ""
+          },
+          "447": {
+            "source": "        // Primitives and their corresponding object wrappers are",
+            "coverage": ""
+          },
+          "448": {
+            "source": "        // equivalent; thus, `\"5\"` is equivalent to `new String(\"5\")`.",
+            "coverage": ""
+          },
+          "449": {
+            "source": "        return a == String(b);",
+            "coverage": 2
+          },
+          "450": {
+            "source": "",
+            "coverage": ""
+          },
+          "451": {
+            "source": "      case '[object Number]':",
+            "coverage": ""
+          },
+          "452": {
+            "source": "        // `NaN`s are equivalent, but non-reflexive. An `equal`",
+            "coverage": ""
+          },
+          "453": {
+            "source": "        // comparison is performed for other numeric values.",
+            "coverage": ""
+          },
+          "454": {
+            "source": "        return a != +a ? b != +b : (a == 0 ? 1 / a == 1 / b : a == +b);",
+            "coverage": 12
+          },
+          "455": {
+            "source": "",
+            "coverage": ""
+          },
+          "456": {
+            "source": "      case '[object Date]':",
+            "coverage": ""
+          },
+          "457": {
+            "source": "      case '[object Boolean]':",
+            "coverage": ""
+          },
+          "458": {
+            "source": "        // Coerce dates and booleans to numeric primitive values.",
+            "coverage": ""
+          },
+          "459": {
+            "source": "        // Dates are compared by their millisecond representations.",
+            "coverage": ""
+          },
+          "460": {
+            "source": "        // Note that invalid dates with millisecond representations",
+            "coverage": ""
+          },
+          "461": {
+            "source": "        // of `NaN` are not equivalent.",
+            "coverage": ""
+          },
+          "462": {
+            "source": "        return +a == +b;",
+            "coverage": 1
+          },
+          "463": {
+            "source": "",
+            "coverage": ""
+          },
+          "464": {
+            "source": "      // RegExps are compared by their source patterns and flags.",
+            "coverage": ""
+          },
+          "465": {
+            "source": "      case '[object RegExp]':",
+            "coverage": ""
+          },
+          "466": {
+            "source": "        return a.source == b.source &&",
+            "coverage": 1
+          },
+          "467": {
+            "source": "            a.global == b.global &&",
+            "coverage": ""
+          },
+          "468": {
+            "source": "            a.multiline == b.multiline &&",
+            "coverage": ""
+          },
+          "469": {
+            "source": "            a.ignoreCase == b.ignoreCase;",
+            "coverage": ""
+          },
+          "470": {
+            "source": "",
+            "coverage": ""
+          },
+          "471": {
+            "source": "      // 简单判断数组包含的 primitive 值是否相等",
+            "coverage": ""
+          },
+          "472": {
+            "source": "      case '[object Array]':",
+            "coverage": ""
+          },
+          "473": {
+            "source": "        var aString = a.toString();",
+            "coverage": 2
+          },
+          "474": {
+            "source": "        var bString = b.toString();",
+            "coverage": 2
+          },
+          "475": {
+            "source": "",
+            "coverage": ""
+          },
+          "476": {
+            "source": "        // 只要包含非 primitive 值，为了稳妥起见，都返回 false",
+            "coverage": ""
+          },
+          "477": {
+            "source": "        return aString.indexOf('[object') === -1 &&",
+            "coverage": 2
+          },
+          "478": {
+            "source": "            bString.indexOf('[object') === -1 &&",
+            "coverage": ""
+          },
+          "479": {
+            "source": "            aString === bString;",
+            "coverage": ""
+          },
+          "480": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "481": {
+            "source": "",
+            "coverage": ""
+          },
+          "482": {
+            "source": "    if (typeof a != 'object' || typeof b != 'object') return false;",
+            "coverage": 4
+          },
+          "483": {
+            "source": "",
+            "coverage": ""
+          },
+          "484": {
+            "source": "    // 简单判断两个对象是否相等，只判断第一层",
+            "coverage": ""
+          },
+          "485": {
+            "source": "    if (isPlainObject(a) && isPlainObject(b)) {",
+            "coverage": 2
+          },
+          "486": {
+            "source": "",
+            "coverage": ""
+          },
+          "487": {
+            "source": "      // 键值不相等，立刻返回 false",
+            "coverage": ""
+          },
+          "488": {
+            "source": "      if (!isEqual(keys(a), keys(b))) {",
+            "coverage": 2
+          },
+          "489": {
+            "source": "        return false;",
+            "coverage": 1
+          },
+          "490": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "491": {
+            "source": "",
+            "coverage": ""
+          },
+          "492": {
+            "source": "      // 键相同，但有值不等，立刻返回 false",
+            "coverage": ""
+          },
+          "493": {
+            "source": "      for (var p in a) {",
+            "coverage": 1
+          },
+          "494": {
+            "source": "        if (a[p] !== b[p]) return false;",
+            "coverage": 2
+          },
+          "495": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "496": {
+            "source": "",
+            "coverage": ""
+          },
+          "497": {
+            "source": "      return true;",
+            "coverage": 0
+          },
+          "498": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "499": {
+            "source": "",
+            "coverage": ""
+          },
+          "500": {
+            "source": "    // 其他情况返回 false, 以避免误判导致 change 事件没发生",
+            "coverage": ""
+          },
+          "501": {
+            "source": "    return false;",
+            "coverage": 0
+          },
+          "502": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "503": {
+            "source": "",
+            "coverage": ""
+          },
+          "504": {
+            "source": "});",
+            "coverage": ""
+          },
+          "505": {
+            "source": "",
+            "coverage": ""
+          }
+        }
+      },
+      {
+        "filename": "src/base.js",
+        "coverage": 100,
+        "hits": 19,
+        "misses": 0,
+        "sloc": 19,
+        "source": {
+          "1": {
+            "source": "define(function(require, exports, module) {",
+            "coverage": 1
+          },
+          "2": {
+            "source": "",
+            "coverage": ""
+          },
+          "3": {
+            "source": "  // Base",
+            "coverage": ""
+          },
+          "4": {
+            "source": "  // ---------",
+            "coverage": ""
+          },
+          "5": {
+            "source": "  // Base 是一个基础类，提供 Class、Events、Attrs 和 Aspect 支持。",
+            "coverage": ""
+          },
+          "6": {
+            "source": "",
+            "coverage": ""
+          },
+          "7": {
+            "source": "  var Class = require('class');",
+            "coverage": 1
+          },
+          "8": {
+            "source": "  var Events = require('events');",
+            "coverage": 1
+          },
+          "9": {
+            "source": "  var Aspect = require('./aspect');",
+            "coverage": 1
+          },
+          "10": {
+            "source": "  var Attribute = require('./attribute');",
+            "coverage": 1
+          },
+          "11": {
+            "source": "",
+            "coverage": ""
+          },
+          "12": {
+            "source": "",
+            "coverage": ""
+          },
+          "13": {
+            "source": "  module.exports = Class.create({",
+            "coverage": 1
+          },
+          "14": {
+            "source": "    Implements: [Events, Aspect, Attribute],",
+            "coverage": ""
+          },
+          "15": {
+            "source": "",
+            "coverage": ""
+          },
+          "16": {
+            "source": "    initialize: function(config) {",
+            "coverage": ""
+          },
+          "17": {
+            "source": "      this.initAttrs(config);",
+            "coverage": 34
+          },
+          "18": {
+            "source": "",
+            "coverage": ""
+          },
+          "19": {
+            "source": "      // Automatically register `this._onChangeAttr` method as",
+            "coverage": ""
+          },
+          "20": {
+            "source": "      // a `change:attr` event handler.",
+            "coverage": ""
+          },
+          "21": {
+            "source": "      parseEventsFromInstance(this, this.attrs);",
+            "coverage": 34
+          },
+          "22": {
+            "source": "    },",
+            "coverage": ""
+          },
+          "23": {
+            "source": "",
+            "coverage": ""
+          },
+          "24": {
+            "source": "    destroy: function() {",
+            "coverage": ""
+          },
+          "25": {
+            "source": "      this.off();",
+            "coverage": 2
+          },
+          "26": {
+            "source": "",
+            "coverage": ""
+          },
+          "27": {
+            "source": "      for (var p in this) {",
+            "coverage": 2
+          },
+          "28": {
+            "source": "        if (this.hasOwnProperty(p)) {",
+            "coverage": 29
+          },
+          "29": {
+            "source": "          delete this[p];",
+            "coverage": 2
+          },
+          "30": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "31": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "32": {
+            "source": "",
+            "coverage": ""
+          },
+          "33": {
+            "source": "      // Destroy should be called only once, generate a fake destroy after called",
+            "coverage": ""
+          },
+          "34": {
+            "source": "      // https://github.com/aralejs/widget/issues/50",
+            "coverage": ""
+          },
+          "35": {
+            "source": "      this.destroy = function() {};",
+            "coverage": 2
+          },
+          "36": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "37": {
+            "source": "  });",
+            "coverage": ""
+          },
+          "38": {
+            "source": "",
+            "coverage": ""
+          },
+          "39": {
+            "source": "",
+            "coverage": ""
+          },
+          "40": {
+            "source": "  function parseEventsFromInstance(host, attrs) {",
+            "coverage": ""
+          },
+          "41": {
+            "source": "    for (var attr in attrs) {",
+            "coverage": 34
+          },
+          "42": {
+            "source": "      if (attrs.hasOwnProperty(attr)) {",
+            "coverage": 61
+          },
+          "43": {
+            "source": "        var m = '_onChange' + ucfirst(attr);",
+            "coverage": 61
+          },
+          "44": {
+            "source": "        if (host[m]) {",
+            "coverage": 61
+          },
+          "45": {
+            "source": "          host.on('change:' + attr, host[m]);",
+            "coverage": 15
+          },
+          "46": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "47": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "48": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "49": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "50": {
+            "source": "",
+            "coverage": ""
+          },
+          "51": {
+            "source": "  function ucfirst(str) {",
+            "coverage": ""
+          },
+          "52": {
+            "source": "    return str.charAt(0).toUpperCase() + str.substring(1);",
+            "coverage": 61
+          },
+          "53": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "54": {
+            "source": "});",
+            "coverage": ""
+          },
+          "55": {
+            "source": "",
+            "coverage": ""
+          }
+        }
+      }
+    ],
+    "stats": {
+      "suites": 1,
+      "tests": 32,
+      "passes": 32,
+      "pending": 0,
+      "failures": 0,
+      "start": "2013-08-19T07:56:38.650Z",
+      "end": "2013-08-19T07:56:38.747Z",
+      "duration": 97
+    },
+    "tests": [
+      {
+        "title": "normal usage",
+        "fullTitle": "Base normal usage",
+        "duration": 2
+      },
+      {
+        "title": "events supporting",
+        "fullTitle": "Base events supporting",
+        "duration": 2
+      },
+      {
+        "title": "attrs merging",
+        "fullTitle": "Base attrs merging",
+        "duration": 3
+      },
+      {
+        "title": "attrs cloning",
+        "fullTitle": "Base attrs cloning",
+        "duration": 2
+      },
+      {
+        "title": "events declaration in config",
+        "fullTitle": "Base events declaration in config",
+        "duration": 3
+      },
+      {
+        "title": "attrs from ancestors",
+        "fullTitle": "Base attrs from ancestors",
+        "duration": 3
+      },
+      {
+        "title": "alipay/arale#49: deep clone bug in initAttrs",
+        "fullTitle": "Base alipay/arale#49: deep clone bug in initAttrs",
+        "duration": 1
+      },
+      {
+        "title": "attrs: normal usage",
+        "fullTitle": "Base attrs: normal usage",
+        "duration": 2
+      },
+      {
+        "title": "attrs: inherited ones",
+        "fullTitle": "Base attrs: inherited ones",
+        "duration": 2
+      },
+      {
+        "title": "related attrs",
+        "fullTitle": "Base related attrs",
+        "duration": 8
+      },
+      {
+        "title": "related attrs change events",
+        "fullTitle": "Base related attrs change events",
+        "duration": 2
+      },
+      {
+        "title": "attrs change events",
+        "fullTitle": "Base attrs change events",
+        "duration": 5
+      },
+      {
+        "title": "example in attribute.md",
+        "fullTitle": "Base example in attribute.md",
+        "duration": 2
+      },
+      {
+        "title": "aspect",
+        "fullTitle": "Base aspect",
+        "duration": 3
+      },
+      {
+        "title": "prevent before event",
+        "fullTitle": "Base prevent before event",
+        "duration": 7
+      },
+      {
+        "title": "test change method",
+        "fullTitle": "Base test change method",
+        "duration": 4
+      },
+      {
+        "title": "after/before support binding multiple methodNames at once",
+        "fullTitle": "Base after/before support binding multiple methodNames at once",
+        "duration": 1
+      },
+      {
+        "title": "special properties getter",
+        "fullTitle": "Base special properties getter",
+        "duration": 1
+      },
+      {
+        "title": "#2 share instance",
+        "fullTitle": "Base #2 share instance",
+        "duration": 2
+      },
+      {
+        "title": "#3 attrs can not be { value: 1 }",
+        "fullTitle": "Base #3 attrs can not be { value: 1 }",
+        "duration": 0
+      },
+      {
+        "title": "#4 the merging bug of jQuery-like object",
+        "fullTitle": "Base #4 the merging bug of jQuery-like object",
+        "duration": 1
+      },
+      {
+        "title": "#16 after callback should pass arguments from method",
+        "fullTitle": "Base #16 after callback should pass arguments from method",
+        "duration": 1
+      },
+      {
+        "title": "destroy",
+        "fullTitle": "Base destroy",
+        "duration": 1
+      },
+      {
+        "title": "can not set readOnly attr",
+        "fullTitle": "Base can not set readOnly attr",
+        "duration": 4
+      },
+      {
+        "title": "attr can be overrided",
+        "fullTitle": "Base attr can be overrided",
+        "duration": 2
+      },
+      {
+        "title": "change silent attr manually",
+        "fullTitle": "Base change silent attr manually",
+        "duration": 1
+      },
+      {
+        "title": "other attr format",
+        "fullTitle": "Base other attr format",
+        "duration": 1
+      },
+      {
+        "title": "attr moment",
+        "fullTitle": "Base attr moment",
+        "duration": 3
+      },
+      {
+        "title": "isPlainObject #19",
+        "fullTitle": "Base isPlainObject #19",
+        "duration": 0
+      },
+      {
+        "title": "setter need userValue",
+        "fullTitle": "Base setter need userValue",
+        "duration": 1
+      },
+      {
+        "title": "destroy once",
+        "fullTitle": "Base destroy once",
+        "duration": 1
+      },
+      {
+        "title": "isEmptyObject #22",
+        "fullTitle": "Base isEmptyObject #22",
+        "duration": 12
+      }
+    ],
+    "failures": [],
+    "passes": [
+      {
+        "title": "normal usage",
+        "fullTitle": "Base normal usage",
+        "duration": 2
+      },
+      {
+        "title": "events supporting",
+        "fullTitle": "Base events supporting",
+        "duration": 2
+      },
+      {
+        "title": "attrs merging",
+        "fullTitle": "Base attrs merging",
+        "duration": 3
+      },
+      {
+        "title": "attrs cloning",
+        "fullTitle": "Base attrs cloning",
+        "duration": 2
+      },
+      {
+        "title": "events declaration in config",
+        "fullTitle": "Base events declaration in config",
+        "duration": 3
+      },
+      {
+        "title": "attrs from ancestors",
+        "fullTitle": "Base attrs from ancestors",
+        "duration": 3
+      },
+      {
+        "title": "alipay/arale#49: deep clone bug in initAttrs",
+        "fullTitle": "Base alipay/arale#49: deep clone bug in initAttrs",
+        "duration": 1
+      },
+      {
+        "title": "attrs: normal usage",
+        "fullTitle": "Base attrs: normal usage",
+        "duration": 2
+      },
+      {
+        "title": "attrs: inherited ones",
+        "fullTitle": "Base attrs: inherited ones",
+        "duration": 2
+      },
+      {
+        "title": "related attrs",
+        "fullTitle": "Base related attrs",
+        "duration": 8
+      },
+      {
+        "title": "related attrs change events",
+        "fullTitle": "Base related attrs change events",
+        "duration": 2
+      },
+      {
+        "title": "attrs change events",
+        "fullTitle": "Base attrs change events",
+        "duration": 5
+      },
+      {
+        "title": "example in attribute.md",
+        "fullTitle": "Base example in attribute.md",
+        "duration": 2
+      },
+      {
+        "title": "aspect",
+        "fullTitle": "Base aspect",
+        "duration": 3
+      },
+      {
+        "title": "prevent before event",
+        "fullTitle": "Base prevent before event",
+        "duration": 7
+      },
+      {
+        "title": "test change method",
+        "fullTitle": "Base test change method",
+        "duration": 4
+      },
+      {
+        "title": "after/before support binding multiple methodNames at once",
+        "fullTitle": "Base after/before support binding multiple methodNames at once",
+        "duration": 1
+      },
+      {
+        "title": "special properties getter",
+        "fullTitle": "Base special properties getter",
+        "duration": 1
+      },
+      {
+        "title": "#2 share instance",
+        "fullTitle": "Base #2 share instance",
+        "duration": 2
+      },
+      {
+        "title": "#3 attrs can not be { value: 1 }",
+        "fullTitle": "Base #3 attrs can not be { value: 1 }",
+        "duration": 0
+      },
+      {
+        "title": "#4 the merging bug of jQuery-like object",
+        "fullTitle": "Base #4 the merging bug of jQuery-like object",
+        "duration": 1
+      },
+      {
+        "title": "#16 after callback should pass arguments from method",
+        "fullTitle": "Base #16 after callback should pass arguments from method",
+        "duration": 1
+      },
+      {
+        "title": "destroy",
+        "fullTitle": "Base destroy",
+        "duration": 1
+      },
+      {
+        "title": "can not set readOnly attr",
+        "fullTitle": "Base can not set readOnly attr",
+        "duration": 4
+      },
+      {
+        "title": "attr can be overrided",
+        "fullTitle": "Base attr can be overrided",
+        "duration": 2
+      },
+      {
+        "title": "change silent attr manually",
+        "fullTitle": "Base change silent attr manually",
+        "duration": 1
+      },
+      {
+        "title": "other attr format",
+        "fullTitle": "Base other attr format",
+        "duration": 1
+      },
+      {
+        "title": "attr moment",
+        "fullTitle": "Base attr moment",
+        "duration": 3
+      },
+      {
+        "title": "isPlainObject #19",
+        "fullTitle": "Base isPlainObject #19",
+        "duration": 0
+      },
+      {
+        "title": "setter need userValue",
+        "fullTitle": "Base setter need userValue",
+        "duration": 1
+      },
+      {
+        "title": "destroy once",
+        "fullTitle": "Base destroy once",
+        "duration": 1
+      },
+      {
+        "title": "isEmptyObject #22",
+        "fullTitle": "Base isEmptyObject #22",
+        "duration": 12
+      }
+    ]
+  },
+  {
+    "instrumentation": "node-jscoverage",
+    "sloc": 234,
+    "hits": 222,
+    "misses": 12,
+    "coverage": 94.87179487179486,
+    "files": [
+      {
+        "filename": "src/aspect.js",
+        "coverage": 100,
+        "hits": 28,
+        "misses": 0,
+        "sloc": 28,
+        "source": {
+          "1": {
+            "source": "define(function(require, exports) {",
+            "coverage": 1
+          },
+          "2": {
+            "source": "",
+            "coverage": ""
+          },
+          "3": {
+            "source": "  // Aspect",
+            "coverage": ""
+          },
+          "4": {
+            "source": "  // ---------------------",
+            "coverage": ""
+          },
+          "5": {
+            "source": "  // Thanks to:",
+            "coverage": ""
+          },
+          "6": {
+            "source": "  //  - http://yuilibrary.com/yui/docs/api/classes/Do.html",
+            "coverage": ""
+          },
+          "7": {
+            "source": "  //  - http://code.google.com/p/jquery-aop/",
+            "coverage": ""
+          },
+          "8": {
+            "source": "  //  - http://lazutkin.com/blog/2008/may/18/aop-aspect-javascript-dojo/",
+            "coverage": ""
+          },
+          "9": {
+            "source": "",
+            "coverage": ""
+          },
+          "10": {
+            "source": "",
+            "coverage": ""
+          },
+          "11": {
+            "source": "  // 在指定方法执行前，先执行 callback",
+            "coverage": ""
+          },
+          "12": {
+            "source": "  exports.before = function(methodName, callback, context) {",
+            "coverage": 1
+          },
+          "13": {
+            "source": "    return weave.call(this, 'before', methodName, callback, context);",
+            "coverage": 5
+          },
+          "14": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "15": {
+            "source": "",
+            "coverage": ""
+          },
+          "16": {
+            "source": "",
+            "coverage": ""
+          },
+          "17": {
+            "source": "  // 在指定方法执行后，再执行 callback",
+            "coverage": ""
+          },
+          "18": {
+            "source": "  exports.after = function(methodName, callback, context) {",
+            "coverage": 1
+          },
+          "19": {
+            "source": "    return weave.call(this, 'after', methodName, callback, context);",
+            "coverage": 5
+          },
+          "20": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "21": {
+            "source": "",
+            "coverage": ""
+          },
+          "22": {
+            "source": "",
+            "coverage": ""
+          },
+          "23": {
+            "source": "  // Helpers",
+            "coverage": ""
+          },
+          "24": {
+            "source": "  // -------",
+            "coverage": ""
+          },
+          "25": {
+            "source": "",
+            "coverage": ""
+          },
+          "26": {
+            "source": "  var eventSplitter = /\\s+/;",
+            "coverage": 1
+          },
+          "27": {
+            "source": "",
+            "coverage": ""
+          },
+          "28": {
+            "source": "  function weave(when, methodName, callback, context) {",
+            "coverage": ""
+          },
+          "29": {
+            "source": "    var names = methodName.split(eventSplitter);",
+            "coverage": 10
+          },
+          "30": {
+            "source": "    var name, method;",
+            "coverage": 10
+          },
+          "31": {
+            "source": "",
+            "coverage": ""
+          },
+          "32": {
+            "source": "    while (name = names.shift()) {",
+            "coverage": 10
+          },
+          "33": {
+            "source": "      method = getMethod(this, name);",
+            "coverage": 12
+          },
+          "34": {
+            "source": "      if (!method.__isAspected) {",
+            "coverage": 11
+          },
+          "35": {
+            "source": "        wrap.call(this, name);",
+            "coverage": 6
+          },
+          "36": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "37": {
+            "source": "      this.on(when + ':' + name, callback, context);",
+            "coverage": 11
+          },
+          "38": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "39": {
+            "source": "",
+            "coverage": ""
+          },
+          "40": {
+            "source": "    return this;",
+            "coverage": 9
+          },
+          "41": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "42": {
+            "source": "",
+            "coverage": ""
+          },
+          "43": {
+            "source": "",
+            "coverage": ""
+          },
+          "44": {
+            "source": "  function getMethod(host, methodName) {",
+            "coverage": ""
+          },
+          "45": {
+            "source": "    var method = host[methodName];",
+            "coverage": 12
+          },
+          "46": {
+            "source": "    if (!method) {",
+            "coverage": 12
+          },
+          "47": {
+            "source": "      throw new Error('Invalid method name: ' + methodName);",
+            "coverage": 1
+          },
+          "48": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "49": {
+            "source": "    return method;",
+            "coverage": 11
+          },
+          "50": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "51": {
+            "source": "",
+            "coverage": ""
+          },
+          "52": {
+            "source": "",
+            "coverage": ""
+          },
+          "53": {
+            "source": "  function wrap(methodName) {",
+            "coverage": ""
+          },
+          "54": {
+            "source": "    var old = this[methodName];",
+            "coverage": 6
+          },
+          "55": {
+            "source": "",
+            "coverage": ""
+          },
+          "56": {
+            "source": "    this[methodName] = function() {",
+            "coverage": 6
+          },
+          "57": {
+            "source": "      var args = Array.prototype.slice.call(arguments);",
+            "coverage": 9
+          },
+          "58": {
+            "source": "      var beforeArgs = ['before:' + methodName].concat(args);",
+            "coverage": 9
+          },
+          "59": {
+            "source": "",
+            "coverage": ""
+          },
+          "60": {
+            "source": "      // prevent if trigger return false",
+            "coverage": ""
+          },
+          "61": {
+            "source": "      if (this.trigger.apply(this, beforeArgs) === false) return;",
+            "coverage": 10
+          },
+          "62": {
+            "source": "",
+            "coverage": ""
+          },
+          "63": {
+            "source": "      var ret = old.apply(this, arguments);",
+            "coverage": 8
+          },
+          "64": {
+            "source": "      var afterArgs = ['after:' + methodName, ret].concat(args);",
+            "coverage": 8
+          },
+          "65": {
+            "source": "      this.trigger.apply(this, afterArgs);",
+            "coverage": 8
+          },
+          "66": {
+            "source": "",
+            "coverage": ""
+          },
+          "67": {
+            "source": "      return ret;",
+            "coverage": 8
+          },
+          "68": {
+            "source": "    };",
+            "coverage": ""
+          },
+          "69": {
+            "source": "",
+            "coverage": ""
+          },
+          "70": {
+            "source": "    this[methodName].__isAspected = true;",
+            "coverage": 6
+          },
+          "71": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "72": {
+            "source": "",
+            "coverage": ""
+          },
+          "73": {
+            "source": "});",
+            "coverage": ""
+          },
+          "74": {
+            "source": "",
+            "coverage": ""
+          }
+        }
+      },
+      {
+        "filename": "src/attribute.js",
+        "coverage": 93.58288770053476,
+        "hits": 175,
+        "misses": 12,
+        "sloc": 187,
+        "source": {
+          "1": {
+            "source": "define(function(require, exports) {",
+            "coverage": 1
+          },
+          "2": {
+            "source": "",
+            "coverage": ""
+          },
+          "3": {
+            "source": "  // Attribute",
+            "coverage": ""
+          },
+          "4": {
+            "source": "  // -----------------",
+            "coverage": ""
+          },
+          "5": {
+            "source": "  // Thanks to:",
+            "coverage": ""
+          },
+          "6": {
+            "source": "  //  - http://documentcloud.github.com/backbone/#Model",
+            "coverage": ""
+          },
+          "7": {
+            "source": "  //  - http://yuilibrary.com/yui/docs/api/classes/AttributeCore.html",
+            "coverage": ""
+          },
+          "8": {
+            "source": "  //  - https://github.com/berzniz/backbone.getters.setters",
+            "coverage": ""
+          },
+          "9": {
+            "source": "",
+            "coverage": ""
+          },
+          "10": {
+            "source": "",
+            "coverage": ""
+          },
+          "11": {
+            "source": "  // 负责 attributes 的初始化",
+            "coverage": ""
+          },
+          "12": {
+            "source": "  // attributes 是与实例相关的状态信息，可读可写，发生变化时，会自动触发相关事件",
+            "coverage": ""
+          },
+          "13": {
+            "source": "  exports.initAttrs = function(config) {",
+            "coverage": 1
+          },
+          "14": {
+            "source": "    // initAttrs 是在初始化时调用的，默认情况下实例上肯定没有 attrs，不存在覆盖问题",
+            "coverage": ""
+          },
+          "15": {
+            "source": "    var attrs = this.attrs = {};",
+            "coverage": 34
+          },
+          "16": {
+            "source": "",
+            "coverage": ""
+          },
+          "17": {
+            "source": "    // Get all inherited attributes.",
+            "coverage": ""
+          },
+          "18": {
+            "source": "    var specialProps = this.propsInAttrs || [];",
+            "coverage": 34
+          },
+          "19": {
+            "source": "    mergeInheritedAttrs(attrs, this, specialProps);",
+            "coverage": 34
+          },
+          "20": {
+            "source": "",
+            "coverage": ""
+          },
+          "21": {
+            "source": "    // Merge user-specific attributes from config.",
+            "coverage": ""
+          },
+          "22": {
+            "source": "    if (config) {",
+            "coverage": 34
+          },
+          "23": {
+            "source": "      mergeUserValue(attrs, config);",
+            "coverage": 19
+          },
+          "24": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "25": {
+            "source": "",
+            "coverage": ""
+          },
+          "26": {
+            "source": "    // 对于有 setter 的属性，要用初始值 set 一下，以保证关联属性也一同初始化",
+            "coverage": ""
+          },
+          "27": {
+            "source": "    setSetterAttrs(this, attrs, config);",
+            "coverage": 34
+          },
+          "28": {
+            "source": "",
+            "coverage": ""
+          },
+          "29": {
+            "source": "    // Convert `on/before/afterXxx` config to event handler.",
+            "coverage": ""
+          },
+          "30": {
+            "source": "    parseEventsFromAttrs(this, attrs);",
+            "coverage": 34
+          },
+          "31": {
+            "source": "",
+            "coverage": ""
+          },
+          "32": {
+            "source": "    // 将 this.attrs 上的 special properties 放回 this 上",
+            "coverage": ""
+          },
+          "33": {
+            "source": "    copySpecialProps(specialProps, this, attrs, true);",
+            "coverage": 34
+          },
+          "34": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "35": {
+            "source": "",
+            "coverage": ""
+          },
+          "36": {
+            "source": "",
+            "coverage": ""
+          },
+          "37": {
+            "source": "  // Get the value of an attribute.",
+            "coverage": ""
+          },
+          "38": {
+            "source": "  exports.get = function(key) {",
+            "coverage": 1
+          },
+          "39": {
+            "source": "    var attr = this.attrs[key] || {};",
+            "coverage": 129
+          },
+          "40": {
+            "source": "    var val = attr.value;",
+            "coverage": 129
+          },
+          "41": {
+            "source": "    return attr.getter ? attr.getter.call(this, val, key) : val;",
+            "coverage": 129
+          },
+          "42": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "43": {
+            "source": "",
+            "coverage": ""
+          },
+          "44": {
+            "source": "",
+            "coverage": ""
+          },
+          "45": {
+            "source": "  // Set a hash of model attributes on the object, firing `\"change\"` unless",
+            "coverage": ""
+          },
+          "46": {
+            "source": "  // you choose to silence it.",
+            "coverage": ""
+          },
+          "47": {
+            "source": "  exports.set = function(key, val, options) {",
+            "coverage": 1
+          },
+          "48": {
+            "source": "    var attrs = {};",
+            "coverage": 48
+          },
+          "49": {
+            "source": "",
+            "coverage": ""
+          },
+          "50": {
+            "source": "    // set(\"key\", val, options)",
+            "coverage": ""
+          },
+          "51": {
+            "source": "    if (isString(key)) {",
+            "coverage": 48
+          },
+          "52": {
+            "source": "      attrs[key] = val;",
+            "coverage": 47
+          },
+          "53": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "54": {
+            "source": "    // set({ \"key\": val, \"key2\": val2 }, options)",
+            "coverage": ""
+          },
+          "55": {
+            "source": "    else {",
+            "coverage": ""
+          },
+          "56": {
+            "source": "      attrs = key;",
+            "coverage": 1
+          },
+          "57": {
+            "source": "      options = val;",
+            "coverage": 1
+          },
+          "58": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "59": {
+            "source": "",
+            "coverage": ""
+          },
+          "60": {
+            "source": "    options || (options = {});",
+            "coverage": 48
+          },
+          "61": {
+            "source": "    var silent = options.silent;",
+            "coverage": 48
+          },
+          "62": {
+            "source": "    var override = options.override;",
+            "coverage": 48
+          },
+          "63": {
+            "source": "",
+            "coverage": ""
+          },
+          "64": {
+            "source": "    var now = this.attrs;",
+            "coverage": 48
+          },
+          "65": {
+            "source": "    var changed = this.__changedAttrs || (this.__changedAttrs = {});",
+            "coverage": 48
+          },
+          "66": {
+            "source": "",
+            "coverage": ""
+          },
+          "67": {
+            "source": "    for (key in attrs) {",
+            "coverage": 48
+          },
+          "68": {
+            "source": "      if (!attrs.hasOwnProperty(key)) continue;",
+            "coverage": 50
+          },
+          "69": {
+            "source": "",
+            "coverage": ""
+          },
+          "70": {
+            "source": "      var attr = now[key] || (now[key] = {});",
+            "coverage": 50
+          },
+          "71": {
+            "source": "      val = attrs[key];",
+            "coverage": 50
+          },
+          "72": {
+            "source": "",
+            "coverage": ""
+          },
+          "73": {
+            "source": "      if (attr.readOnly) {",
+            "coverage": 50
+          },
+          "74": {
+            "source": "        throw new Error('This attribute is readOnly: ' + key);",
+            "coverage": 1
+          },
+          "75": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "76": {
+            "source": "",
+            "coverage": ""
+          },
+          "77": {
+            "source": "      // invoke setter",
+            "coverage": ""
+          },
+          "78": {
+            "source": "      if (attr.setter) {",
+            "coverage": 49
+          },
+          "79": {
+            "source": "        val = attr.setter.call(this, val, key);",
+            "coverage": 6
+          },
+          "80": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "81": {
+            "source": "",
+            "coverage": ""
+          },
+          "82": {
+            "source": "      // 获取设置前的 prev 值",
+            "coverage": ""
+          },
+          "83": {
+            "source": "      var prev = this.get(key);",
+            "coverage": 49
+          },
+          "84": {
+            "source": "",
+            "coverage": ""
+          },
+          "85": {
+            "source": "      // 获取需要设置的 val 值",
+            "coverage": ""
+          },
+          "86": {
+            "source": "      // 如果设置了 override 为 true，表示要强制覆盖，就不去 merge 了",
+            "coverage": ""
+          },
+          "87": {
+            "source": "      // 都为对象时，做 merge 操作，以保留 prev 上没有覆盖的值",
+            "coverage": ""
+          },
+          "88": {
+            "source": "      if (!override && isPlainObject(prev) && isPlainObject(val)) {",
+            "coverage": 49
+          },
+          "89": {
+            "source": "        val = merge(merge({}, prev), val);",
+            "coverage": 1
+          },
+          "90": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "91": {
+            "source": "",
+            "coverage": ""
+          },
+          "92": {
+            "source": "      // set finally",
+            "coverage": ""
+          },
+          "93": {
+            "source": "      now[key].value = val;",
+            "coverage": 49
+          },
+          "94": {
+            "source": "",
+            "coverage": ""
+          },
+          "95": {
+            "source": "      // invoke change event",
+            "coverage": ""
+          },
+          "96": {
+            "source": "      // 初始化时对 set 的调用，不触发任何事件",
+            "coverage": ""
+          },
+          "97": {
+            "source": "      if (!this.__initializingAttrs && !isEqual(prev, val)) {",
+            "coverage": 49
+          },
+          "98": {
+            "source": "        if (silent) {",
+            "coverage": 28
+          },
+          "99": {
+            "source": "          changed[key] = [val, prev];",
+            "coverage": 3
+          },
+          "100": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "101": {
+            "source": "        else {",
+            "coverage": ""
+          },
+          "102": {
+            "source": "          this.trigger('change:' + key, val, prev, key);",
+            "coverage": 25
+          },
+          "103": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "104": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "105": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "106": {
+            "source": "",
+            "coverage": ""
+          },
+          "107": {
+            "source": "    return this;",
+            "coverage": 47
+          },
+          "108": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "109": {
+            "source": "",
+            "coverage": ""
+          },
+          "110": {
+            "source": "",
+            "coverage": ""
+          },
+          "111": {
+            "source": "  // Call this method to manually fire a `\"change\"` event for triggering",
+            "coverage": ""
+          },
+          "112": {
+            "source": "  // a `\"change:attribute\"` event for each changed attribute.",
+            "coverage": ""
+          },
+          "113": {
+            "source": "  exports.change = function() {",
+            "coverage": 1
+          },
+          "114": {
+            "source": "    var changed = this.__changedAttrs;",
+            "coverage": 3
+          },
+          "115": {
+            "source": "",
+            "coverage": ""
+          },
+          "116": {
+            "source": "    if (changed) {",
+            "coverage": 3
+          },
+          "117": {
+            "source": "      for (var key in changed) {",
+            "coverage": 2
+          },
+          "118": {
+            "source": "        if (changed.hasOwnProperty(key)) {",
+            "coverage": 1
+          },
+          "119": {
+            "source": "          var args = changed[key];",
+            "coverage": 1
+          },
+          "120": {
+            "source": "          this.trigger('change:' + key, args[0], args[1], key);",
+            "coverage": 1
+          },
+          "121": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "122": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "123": {
+            "source": "      delete this.__changedAttrs;",
+            "coverage": 2
+          },
+          "124": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "125": {
+            "source": "",
+            "coverage": ""
+          },
+          "126": {
+            "source": "    return this;",
+            "coverage": 3
+          },
+          "127": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "128": {
+            "source": "",
+            "coverage": ""
+          },
+          "129": {
+            "source": "  // for test",
+            "coverage": ""
+          },
+          "130": {
+            "source": "  exports._isPlainObject = isPlainObject;",
+            "coverage": 1
+          },
+          "131": {
+            "source": "",
+            "coverage": ""
+          },
+          "132": {
+            "source": "  // Helpers",
+            "coverage": ""
+          },
+          "133": {
+            "source": "  // -------",
+            "coverage": ""
+          },
+          "134": {
+            "source": "",
+            "coverage": ""
+          },
+          "135": {
+            "source": "  var toString = Object.prototype.toString;",
+            "coverage": 1
+          },
+          "136": {
+            "source": "  var hasOwn = Object.prototype.hasOwnProperty;",
+            "coverage": 1
+          },
+          "137": {
+            "source": "",
+            "coverage": ""
+          },
+          "138": {
+            "source": "  /**",
+            "coverage": ""
+          },
+          "139": {
+            "source": "   * Detect the JScript [[DontEnum]] bug:",
+            "coverage": ""
+          },
+          "140": {
+            "source": "   * In IE < 9 an objects own properties, shadowing non-enumerable ones, are",
+            "coverage": ""
+          },
+          "141": {
+            "source": "   * made non-enumerable as well.",
+            "coverage": ""
+          },
+          "142": {
+            "source": "   * https://github.com/bestiejs/lodash/blob/7520066fc916e205ef84cb97fbfe630d7c154158/lodash.js#L134-L144",
+            "coverage": ""
+          },
+          "143": {
+            "source": "   */",
+            "coverage": ""
+          },
+          "144": {
+            "source": "  /** Detect if own properties are iterated after inherited properties (IE < 9) */",
+            "coverage": ""
+          },
+          "145": {
+            "source": "  var iteratesOwnLast;",
+            "coverage": 1
+          },
+          "146": {
+            "source": "  (function() {",
+            "coverage": 1
+          },
+          "147": {
+            "source": "    var props = [];",
+            "coverage": 1
+          },
+          "148": {
+            "source": "    function Ctor() { this.x = 1; }",
+            "coverage": 1
+          },
+          "149": {
+            "source": "    Ctor.prototype = { 'valueOf': 1, 'y': 1 };",
+            "coverage": 1
+          },
+          "150": {
+            "source": "    for (var prop in new Ctor()) { props.push(prop); }",
+            "coverage": 4
+          },
+          "151": {
+            "source": "    iteratesOwnLast = props[0] !== 'x';",
+            "coverage": 1
+          },
+          "152": {
+            "source": "  }());",
+            "coverage": ""
+          },
+          "153": {
+            "source": "",
+            "coverage": ""
+          },
+          "154": {
+            "source": "  var isArray = Array.isArray || function(val) {",
+            "coverage": 1
+          },
+          "155": {
+            "source": "    return toString.call(val) === '[object Array]';",
+            "coverage": 0
+          },
+          "156": {
+            "source": "  };",
+            "coverage": ""
+          },
+          "157": {
+            "source": "",
+            "coverage": ""
+          },
+          "158": {
+            "source": "  function isString(val) {",
+            "coverage": ""
+          },
+          "159": {
+            "source": "    return toString.call(val) === '[object String]';",
+            "coverage": 90
+          },
+          "160": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "161": {
+            "source": "",
+            "coverage": ""
+          },
+          "162": {
+            "source": "  function isFunction(val) {",
+            "coverage": ""
+          },
+          "163": {
+            "source": "    return toString.call(val) === '[object Function]';",
+            "coverage": 65
+          },
+          "164": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "165": {
+            "source": "",
+            "coverage": ""
+          },
+          "166": {
+            "source": "  function isWindow(o) {",
+            "coverage": ""
+          },
+          "167": {
+            "source": "    return o != null && o == o.window;",
+            "coverage": 170
+          },
+          "168": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "169": {
+            "source": "",
+            "coverage": ""
+          },
+          "170": {
+            "source": "  function isPlainObject(o) {",
+            "coverage": ""
+          },
+          "171": {
+            "source": "    // Must be an Object.",
+            "coverage": ""
+          },
+          "172": {
+            "source": "    // Because of IE, we also have to check the presence of the constructor",
+            "coverage": ""
+          },
+          "173": {
+            "source": "    // property. Make sure that DOM nodes and window objects don't",
+            "coverage": ""
+          },
+          "174": {
+            "source": "    // pass through, as well",
+            "coverage": ""
+          },
+          "175": {
+            "source": "    if (!o || toString.call(o) !== \"[object Object]\" ||",
+            "coverage": 247
+          },
+          "176": {
+            "source": "        o.nodeType || isWindow(o)) {",
+            "coverage": ""
+          },
+          "177": {
+            "source": "      return false;",
+            "coverage": 194
+          },
+          "178": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "179": {
+            "source": "",
+            "coverage": ""
+          },
+          "180": {
+            "source": "    try {",
+            "coverage": 53
+          },
+          "181": {
+            "source": "      // Not own constructor property must be Object",
+            "coverage": ""
+          },
+          "182": {
+            "source": "      if (o.constructor &&",
+            "coverage": 53
+          },
+          "183": {
+            "source": "          !hasOwn.call(o, \"constructor\") &&",
+            "coverage": ""
+          },
+          "184": {
+            "source": "          !hasOwn.call(o.constructor.prototype, \"isPrototypeOf\")) {",
+            "coverage": ""
+          },
+          "185": {
+            "source": "        return false;",
+            "coverage": 2
+          },
+          "186": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "187": {
+            "source": "    } catch (e) {",
+            "coverage": ""
+          },
+          "188": {
+            "source": "      // IE8,9 Will throw exceptions on certain host objects #9897",
+            "coverage": ""
+          },
+          "189": {
+            "source": "      return false;",
+            "coverage": 0
+          },
+          "190": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "191": {
+            "source": "",
+            "coverage": ""
+          },
+          "192": {
+            "source": "    var key;",
+            "coverage": 51
+          },
+          "193": {
+            "source": "",
+            "coverage": ""
+          },
+          "194": {
+            "source": "    // Support: IE<9",
+            "coverage": ""
+          },
+          "195": {
+            "source": "    // Handle iteration over inherited properties before own properties.",
+            "coverage": ""
+          },
+          "196": {
+            "source": "    // http://bugs.jquery.com/ticket/12199",
+            "coverage": ""
+          },
+          "197": {
+            "source": "    if (iteratesOwnLast) {",
+            "coverage": 51
+          },
+          "198": {
+            "source": "      for (key in o) {",
+            "coverage": 0
+          },
+          "199": {
+            "source": "        return hasOwn.call(o, key);",
+            "coverage": 0
+          },
+          "200": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "201": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "202": {
+            "source": "",
+            "coverage": ""
+          },
+          "203": {
+            "source": "    // Own properties are enumerated firstly, so to speed up,",
+            "coverage": ""
+          },
+          "204": {
+            "source": "    // if last one is own, then all properties are own.",
+            "coverage": ""
+          },
+          "205": {
+            "source": "    for (key in o) {}",
+            "coverage": 51
+          },
+          "206": {
+            "source": "",
+            "coverage": ""
+          },
+          "207": {
+            "source": "    return key === undefined || hasOwn.call(o, key);",
+            "coverage": 51
+          },
+          "208": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "209": {
+            "source": "",
+            "coverage": ""
+          },
+          "210": {
+            "source": "  function isEmptyObject(o) {",
+            "coverage": ""
+          },
+          "211": {
+            "source": "    if (!o || toString.call(o) !== \"[object Object]\" ||",
+            "coverage": 143
+          },
+          "212": {
+            "source": "        o.nodeType || isWindow(o) || !o.hasOwnProperty) {",
+            "coverage": ""
+          },
+          "213": {
+            "source": "      return false;",
+            "coverage": 26
+          },
+          "214": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "215": {
+            "source": "",
+            "coverage": ""
+          },
+          "216": {
+            "source": "    for (var p in o) {",
+            "coverage": 117
+          },
+          "217": {
+            "source": "      if (o.hasOwnProperty(p)) return false;",
+            "coverage": 76
+          },
+          "218": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "219": {
+            "source": "    return true;",
+            "coverage": 79
+          },
+          "220": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "221": {
+            "source": "",
+            "coverage": ""
+          },
+          "222": {
+            "source": "  function merge(receiver, supplier) {",
+            "coverage": ""
+          },
+          "223": {
+            "source": "    var key, value;",
+            "coverage": 17
+          },
+          "224": {
+            "source": "",
+            "coverage": ""
+          },
+          "225": {
+            "source": "    for (key in supplier) {",
+            "coverage": 17
+          },
+          "226": {
+            "source": "      if (supplier.hasOwnProperty(key)) {",
+            "coverage": 28
+          },
+          "227": {
+            "source": "        receiver[key] = cloneValue(supplier[key], receiver[key]);",
+            "coverage": 28
+          },
+          "228": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "229": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "230": {
+            "source": "",
+            "coverage": ""
+          },
+          "231": {
+            "source": "    return receiver;",
+            "coverage": 17
+          },
+          "232": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "233": {
+            "source": "",
+            "coverage": ""
+          },
+          "234": {
+            "source": "  // 只 clone 数组和 plain object，其他的保持不变",
+            "coverage": ""
+          },
+          "235": {
+            "source": "  function cloneValue(value, prev){",
+            "coverage": ""
+          },
+          "236": {
+            "source": "    if (isArray(value)) {",
+            "coverage": 120
+          },
+          "237": {
+            "source": "      value = value.slice();",
+            "coverage": 9
+          },
+          "238": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "239": {
+            "source": "    else if (isPlainObject(value)) {",
+            "coverage": 111
+          },
+          "240": {
+            "source": "      isPlainObject(prev) || (prev = {});",
+            "coverage": 15
+          },
+          "241": {
+            "source": "",
+            "coverage": ""
+          },
+          "242": {
+            "source": "      value = merge(prev, value);",
+            "coverage": 15
+          },
+          "243": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "244": {
+            "source": "",
+            "coverage": ""
+          },
+          "245": {
+            "source": "    return value;",
+            "coverage": 120
+          },
+          "246": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "247": {
+            "source": "",
+            "coverage": ""
+          },
+          "248": {
+            "source": "  var keys = Object.keys;",
+            "coverage": 1
+          },
+          "249": {
+            "source": "",
+            "coverage": ""
+          },
+          "250": {
+            "source": "  if (!keys) {",
+            "coverage": 1
+          },
+          "251": {
+            "source": "    keys = function(o) {",
+            "coverage": 0
+          },
+          "252": {
+            "source": "      var result = [];",
+            "coverage": 0
+          },
+          "253": {
+            "source": "",
+            "coverage": ""
+          },
+          "254": {
+            "source": "      for (var name in o) {",
+            "coverage": 0
+          },
+          "255": {
+            "source": "        if (o.hasOwnProperty(name)) {",
+            "coverage": 0
+          },
+          "256": {
+            "source": "          result.push(name);",
+            "coverage": 0
+          },
+          "257": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "258": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "259": {
+            "source": "      return result;",
+            "coverage": 0
+          },
+          "260": {
+            "source": "    };",
+            "coverage": ""
+          },
+          "261": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "262": {
+            "source": "",
+            "coverage": ""
+          },
+          "263": {
+            "source": "  function mergeInheritedAttrs(attrs, instance, specialProps) {",
+            "coverage": ""
+          },
+          "264": {
+            "source": "    var inherited = [];",
+            "coverage": 34
+          },
+          "265": {
+            "source": "    var proto = instance.constructor.prototype;",
+            "coverage": 34
+          },
+          "266": {
+            "source": "",
+            "coverage": ""
+          },
+          "267": {
+            "source": "    while (proto) {",
+            "coverage": 34
+          },
+          "268": {
+            "source": "      // 不要拿到 prototype 上的",
+            "coverage": ""
+          },
+          "269": {
+            "source": "      if (!proto.hasOwnProperty('attrs')) {",
+            "coverage": 108
+          },
+          "270": {
+            "source": "        proto.attrs = {};",
+            "coverage": 9
+          },
+          "271": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "272": {
+            "source": "",
+            "coverage": ""
+          },
+          "273": {
+            "source": "      // 将 proto 上的特殊 properties 放到 proto.attrs 上，以便合并",
+            "coverage": ""
+          },
+          "274": {
+            "source": "      copySpecialProps(specialProps, proto.attrs, proto);",
+            "coverage": 108
+          },
+          "275": {
+            "source": "",
+            "coverage": ""
+          },
+          "276": {
+            "source": "      // 为空时不添加",
+            "coverage": ""
+          },
+          "277": {
+            "source": "      if (!isEmptyObject(proto.attrs)) {",
+            "coverage": 108
+          },
+          "278": {
+            "source": "        inherited.unshift(proto.attrs);",
+            "coverage": 34
+          },
+          "279": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "280": {
+            "source": "",
+            "coverage": ""
+          },
+          "281": {
+            "source": "      // 向上回溯一级",
+            "coverage": ""
+          },
+          "282": {
+            "source": "      proto = proto.constructor.superclass;",
+            "coverage": 108
+          },
+          "283": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "284": {
+            "source": "",
+            "coverage": ""
+          },
+          "285": {
+            "source": "    // Merge and clone default values to instance.",
+            "coverage": ""
+          },
+          "286": {
+            "source": "    for (var i = 0, len = inherited.length; i < len; i++) {",
+            "coverage": 34
+          },
+          "287": {
+            "source": "      mergeAttrs(attrs, normalize(inherited[i]));",
+            "coverage": 34
+          },
+          "288": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "289": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "290": {
+            "source": "",
+            "coverage": ""
+          },
+          "291": {
+            "source": "  function mergeUserValue(attrs, config) {",
+            "coverage": ""
+          },
+          "292": {
+            "source": "    mergeAttrs(attrs, normalize(config, true), true);",
+            "coverage": 19
+          },
+          "293": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "294": {
+            "source": "",
+            "coverage": ""
+          },
+          "295": {
+            "source": "  function copySpecialProps(specialProps, receiver, supplier, isAttr2Prop) {",
+            "coverage": ""
+          },
+          "296": {
+            "source": "    for (var i = 0, len = specialProps.length; i < len; i++) {",
+            "coverage": 142
+          },
+          "297": {
+            "source": "      var key = specialProps[i];",
+            "coverage": 4
+          },
+          "298": {
+            "source": "",
+            "coverage": ""
+          },
+          "299": {
+            "source": "      if (supplier.hasOwnProperty(key)) {",
+            "coverage": 4
+          },
+          "300": {
+            "source": "        receiver[key] = isAttr2Prop ? receiver.get(key) : supplier[key];",
+            "coverage": 2
+          },
+          "301": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "302": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "303": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "304": {
+            "source": "",
+            "coverage": ""
+          },
+          "305": {
+            "source": "",
+            "coverage": ""
+          },
+          "306": {
+            "source": "  var EVENT_PATTERN = /^(on|before|after)([A-Z].*)$/;",
+            "coverage": 1
+          },
+          "307": {
+            "source": "  var EVENT_NAME_PATTERN = /^(Change)?([A-Z])(.*)/;",
+            "coverage": 1
+          },
+          "308": {
+            "source": "",
+            "coverage": ""
+          },
+          "309": {
+            "source": "  function parseEventsFromAttrs(host, attrs) {",
+            "coverage": ""
+          },
+          "310": {
+            "source": "    for (var key in attrs) {",
+            "coverage": 34
+          },
+          "311": {
+            "source": "      if (attrs.hasOwnProperty(key)) {",
+            "coverage": 65
+          },
+          "312": {
+            "source": "        var value = attrs[key].value, m;",
+            "coverage": 65
+          },
+          "313": {
+            "source": "",
+            "coverage": ""
+          },
+          "314": {
+            "source": "        if (isFunction(value) && (m = key.match(EVENT_PATTERN))) {",
+            "coverage": 65
+          },
+          "315": {
+            "source": "          host[m[1]](getEventName(m[2]), value);",
+            "coverage": 4
+          },
+          "316": {
+            "source": "          delete attrs[key];",
+            "coverage": 4
+          },
+          "317": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "318": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "319": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "320": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "321": {
+            "source": "",
+            "coverage": ""
+          },
+          "322": {
+            "source": "  // Converts `Show` to `show` and `ChangeTitle` to `change:title`",
+            "coverage": ""
+          },
+          "323": {
+            "source": "  function getEventName(name) {",
+            "coverage": ""
+          },
+          "324": {
+            "source": "    var m = name.match(EVENT_NAME_PATTERN);",
+            "coverage": 4
+          },
+          "325": {
+            "source": "    var ret = m[1] ? 'change:' : '';",
+            "coverage": 4
+          },
+          "326": {
+            "source": "    ret += m[2].toLowerCase() + m[3];",
+            "coverage": 4
+          },
+          "327": {
+            "source": "    return ret;",
+            "coverage": 4
+          },
+          "328": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "329": {
+            "source": "",
+            "coverage": ""
+          },
+          "330": {
+            "source": "",
+            "coverage": ""
+          },
+          "331": {
+            "source": "  function setSetterAttrs(host, attrs, config) {",
+            "coverage": ""
+          },
+          "332": {
+            "source": "    var options = { silent: true };",
+            "coverage": 34
+          },
+          "333": {
+            "source": "    host.__initializingAttrs = true;",
+            "coverage": 34
+          },
+          "334": {
+            "source": "",
+            "coverage": ""
+          },
+          "335": {
+            "source": "    for (var key in config) {",
+            "coverage": 34
+          },
+          "336": {
+            "source": "      if (config.hasOwnProperty(key)) {",
+            "coverage": 36
+          },
+          "337": {
+            "source": "        if (attrs[key].setter) {",
+            "coverage": 36
+          },
+          "338": {
+            "source": "          host.set(key, config[key], options);",
+            "coverage": 4
+          },
+          "339": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "340": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "341": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "342": {
+            "source": "",
+            "coverage": ""
+          },
+          "343": {
+            "source": "    delete host.__initializingAttrs;",
+            "coverage": 34
+          },
+          "344": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "345": {
+            "source": "",
+            "coverage": ""
+          },
+          "346": {
+            "source": "",
+            "coverage": ""
+          },
+          "347": {
+            "source": "  var ATTR_SPECIAL_KEYS = ['value', 'getter', 'setter', 'readOnly'];",
+            "coverage": 1
+          },
+          "348": {
+            "source": "",
+            "coverage": ""
+          },
+          "349": {
+            "source": "  // normalize `attrs` to",
+            "coverage": ""
+          },
+          "350": {
+            "source": "  //",
+            "coverage": ""
+          },
+          "351": {
+            "source": "  //   {",
+            "coverage": ""
+          },
+          "352": {
+            "source": "  //      value: 'xx',",
+            "coverage": ""
+          },
+          "353": {
+            "source": "  //      getter: fn,",
+            "coverage": ""
+          },
+          "354": {
+            "source": "  //      setter: fn,",
+            "coverage": ""
+          },
+          "355": {
+            "source": "  //      readOnly: boolean",
+            "coverage": ""
+          },
+          "356": {
+            "source": "  //   }",
+            "coverage": ""
+          },
+          "357": {
+            "source": "  //",
+            "coverage": ""
+          },
+          "358": {
+            "source": "  function normalize(attrs, isUserValue) {",
+            "coverage": ""
+          },
+          "359": {
+            "source": "    var newAttrs = {};",
+            "coverage": 53
+          },
+          "360": {
+            "source": "",
+            "coverage": ""
+          },
+          "361": {
+            "source": "    for (var key in attrs) {",
+            "coverage": 53
+          },
+          "362": {
+            "source": "      var attr = attrs[key];",
+            "coverage": 99
+          },
+          "363": {
+            "source": "",
+            "coverage": ""
+          },
+          "364": {
+            "source": "      if (!isUserValue &&",
+            "coverage": 99
+          },
+          "365": {
+            "source": "          isPlainObject(attr) &&",
+            "coverage": ""
+          },
+          "366": {
+            "source": "          hasOwnProperties(attr, ATTR_SPECIAL_KEYS)) {",
+            "coverage": ""
+          },
+          "367": {
+            "source": "        newAttrs[key] = attr;",
+            "coverage": 11
+          },
+          "368": {
+            "source": "        continue;",
+            "coverage": 11
+          },
+          "369": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "370": {
+            "source": "",
+            "coverage": ""
+          },
+          "371": {
+            "source": "      newAttrs[key] = {",
+            "coverage": 88
+          },
+          "372": {
+            "source": "        value: attr",
+            "coverage": ""
+          },
+          "373": {
+            "source": "      };",
+            "coverage": ""
+          },
+          "374": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "375": {
+            "source": "",
+            "coverage": ""
+          },
+          "376": {
+            "source": "    return newAttrs;",
+            "coverage": 53
+          },
+          "377": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "378": {
+            "source": "",
+            "coverage": ""
+          },
+          "379": {
+            "source": "  var ATTR_OPTIONS = ['setter', 'getter', 'readOnly'];",
+            "coverage": 1
+          },
+          "380": {
+            "source": "  // 专用于 attrs 的 merge 方法",
+            "coverage": ""
+          },
+          "381": {
+            "source": "  function mergeAttrs(attrs, inheritedAttrs, isUserValue){",
+            "coverage": ""
+          },
+          "382": {
+            "source": "    var key, value;",
+            "coverage": 53
+          },
+          "383": {
+            "source": "    var attr;",
+            "coverage": 53
+          },
+          "384": {
+            "source": "",
+            "coverage": ""
+          },
+          "385": {
+            "source": "    for (key in inheritedAttrs) {",
+            "coverage": 53
+          },
+          "386": {
+            "source": "      if (inheritedAttrs.hasOwnProperty(key)) {",
+            "coverage": 99
+          },
+          "387": {
+            "source": "        value = inheritedAttrs[key];",
+            "coverage": 99
+          },
+          "388": {
+            "source": "        attr = attrs[key];",
+            "coverage": 99
+          },
+          "389": {
+            "source": "",
+            "coverage": ""
+          },
+          "390": {
+            "source": "        if (!attr) {",
+            "coverage": 99
+          },
+          "391": {
+            "source": "          attr = attrs[key] = {};",
+            "coverage": 65
+          },
+          "392": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "393": {
+            "source": "",
+            "coverage": ""
+          },
+          "394": {
+            "source": "        // 从严谨上来说，遍历 ATTR_SPECIAL_KEYS 更好",
+            "coverage": ""
+          },
+          "395": {
+            "source": "        // 从性能来说，直接 人肉赋值 更快",
+            "coverage": ""
+          },
+          "396": {
+            "source": "        // 这里还是选择 性能优先",
+            "coverage": ""
+          },
+          "397": {
+            "source": "",
+            "coverage": ""
+          },
+          "398": {
+            "source": "        // 只有 value 要复制原值，其他的直接覆盖即可",
+            "coverage": ""
+          },
+          "399": {
+            "source": "        (value['value'] !== undefined) && (attr['value'] = cloneValue(value['value'], attr['value']));",
+            "coverage": 99
+          },
+          "400": {
+            "source": "",
+            "coverage": ""
+          },
+          "401": {
+            "source": "        // 如果是用户赋值，只要考虑value",
+            "coverage": ""
+          },
+          "402": {
+            "source": "        if (isUserValue) continue;",
+            "coverage": 135
+          },
+          "403": {
+            "source": "",
+            "coverage": ""
+          },
+          "404": {
+            "source": "        for (var i in ATTR_OPTIONS) {",
+            "coverage": 63
+          },
+          "405": {
+            "source": "          var option = ATTR_OPTIONS[i];",
+            "coverage": 189
+          },
+          "406": {
+            "source": "          if (value[option] !== undefined) {",
+            "coverage": 189
+          },
+          "407": {
+            "source": "            attr[option] = value[option];",
+            "coverage": 14
+          },
+          "408": {
+            "source": "          }",
+            "coverage": ""
+          },
+          "409": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "410": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "411": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "412": {
+            "source": "",
+            "coverage": ""
+          },
+          "413": {
+            "source": "    return attrs;",
+            "coverage": 53
+          },
+          "414": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "415": {
+            "source": "",
+            "coverage": ""
+          },
+          "416": {
+            "source": "  function hasOwnProperties(object, properties) {",
+            "coverage": ""
+          },
+          "417": {
+            "source": "    for (var i = 0, len = properties.length; i < len; i++) {",
+            "coverage": 18
+          },
+          "418": {
+            "source": "      if (object.hasOwnProperty(properties[i])) {",
+            "coverage": 47
+          },
+          "419": {
+            "source": "        return true;",
+            "coverage": 11
+          },
+          "420": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "421": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "422": {
+            "source": "    return false;",
+            "coverage": 7
+          },
+          "423": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "424": {
+            "source": "",
+            "coverage": ""
+          },
+          "425": {
+            "source": "",
+            "coverage": ""
+          },
+          "426": {
+            "source": "  // 对于 attrs 的 value 来说，以下值都认为是空值： null, undefined, '', [], {}",
+            "coverage": ""
+          },
+          "427": {
+            "source": "  function isEmptyAttrValue(o) {",
+            "coverage": ""
+          },
+          "428": {
+            "source": "    return o == null || // null, undefined",
+            "coverage": 45
+          },
+          "429": {
+            "source": "        (isString(o) || isArray(o)) && o.length === 0 || // '', []",
+            "coverage": ""
+          },
+          "430": {
+            "source": "        isEmptyObject(o); // {}",
+            "coverage": ""
+          },
+          "431": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "432": {
+            "source": "",
+            "coverage": ""
+          },
+          "433": {
+            "source": "  // 判断属性值 a 和 b 是否相等，注意仅适用于属性值的判断，非普适的 === 或 == 判断。",
+            "coverage": ""
+          },
+          "434": {
+            "source": "  function isEqual(a, b) {",
+            "coverage": ""
+          },
+          "435": {
+            "source": "    if (a === b) return true;",
+            "coverage": 46
+          },
+          "436": {
+            "source": "",
+            "coverage": ""
+          },
+          "437": {
+            "source": "    if (isEmptyAttrValue(a) && isEmptyAttrValue(b)) return true;",
+            "coverage": 42
+          },
+          "438": {
+            "source": "",
+            "coverage": ""
+          },
+          "439": {
+            "source": "    // Compare `[[Class]]` names.",
+            "coverage": ""
+          },
+          "440": {
+            "source": "    var className = toString.call(a);",
+            "coverage": 30
+          },
+          "441": {
+            "source": "    if (className != toString.call(b)) return false;",
+            "coverage": 39
+          },
+          "442": {
+            "source": "",
+            "coverage": ""
+          },
+          "443": {
+            "source": "    switch (className) {",
+            "coverage": 21
+          },
+          "444": {
+            "source": "",
+            "coverage": ""
+          },
+          "445": {
+            "source": "      // Strings, numbers, dates, and booleans are compared by value.",
+            "coverage": ""
+          },
+          "446": {
+            "source": "      case '[object String]':",
+            "coverage": ""
+          },
+          "447": {
+            "source": "        // Primitives and their corresponding object wrappers are",
+            "coverage": ""
+          },
+          "448": {
+            "source": "        // equivalent; thus, `\"5\"` is equivalent to `new String(\"5\")`.",
+            "coverage": ""
+          },
+          "449": {
+            "source": "        return a == String(b);",
+            "coverage": 2
+          },
+          "450": {
+            "source": "",
+            "coverage": ""
+          },
+          "451": {
+            "source": "      case '[object Number]':",
+            "coverage": ""
+          },
+          "452": {
+            "source": "        // `NaN`s are equivalent, but non-reflexive. An `equal`",
+            "coverage": ""
+          },
+          "453": {
+            "source": "        // comparison is performed for other numeric values.",
+            "coverage": ""
+          },
+          "454": {
+            "source": "        return a != +a ? b != +b : (a == 0 ? 1 / a == 1 / b : a == +b);",
+            "coverage": 12
+          },
+          "455": {
+            "source": "",
+            "coverage": ""
+          },
+          "456": {
+            "source": "      case '[object Date]':",
+            "coverage": ""
+          },
+          "457": {
+            "source": "      case '[object Boolean]':",
+            "coverage": ""
+          },
+          "458": {
+            "source": "        // Coerce dates and booleans to numeric primitive values.",
+            "coverage": ""
+          },
+          "459": {
+            "source": "        // Dates are compared by their millisecond representations.",
+            "coverage": ""
+          },
+          "460": {
+            "source": "        // Note that invalid dates with millisecond representations",
+            "coverage": ""
+          },
+          "461": {
+            "source": "        // of `NaN` are not equivalent.",
+            "coverage": ""
+          },
+          "462": {
+            "source": "        return +a == +b;",
+            "coverage": 1
+          },
+          "463": {
+            "source": "",
+            "coverage": ""
+          },
+          "464": {
+            "source": "      // RegExps are compared by their source patterns and flags.",
+            "coverage": ""
+          },
+          "465": {
+            "source": "      case '[object RegExp]':",
+            "coverage": ""
+          },
+          "466": {
+            "source": "        return a.source == b.source &&",
+            "coverage": 1
+          },
+          "467": {
+            "source": "            a.global == b.global &&",
+            "coverage": ""
+          },
+          "468": {
+            "source": "            a.multiline == b.multiline &&",
+            "coverage": ""
+          },
+          "469": {
+            "source": "            a.ignoreCase == b.ignoreCase;",
+            "coverage": ""
+          },
+          "470": {
+            "source": "",
+            "coverage": ""
+          },
+          "471": {
+            "source": "      // 简单判断数组包含的 primitive 值是否相等",
+            "coverage": ""
+          },
+          "472": {
+            "source": "      case '[object Array]':",
+            "coverage": ""
+          },
+          "473": {
+            "source": "        var aString = a.toString();",
+            "coverage": 2
+          },
+          "474": {
+            "source": "        var bString = b.toString();",
+            "coverage": 2
+          },
+          "475": {
+            "source": "",
+            "coverage": ""
+          },
+          "476": {
+            "source": "        // 只要包含非 primitive 值，为了稳妥起见，都返回 false",
+            "coverage": ""
+          },
+          "477": {
+            "source": "        return aString.indexOf('[object') === -1 &&",
+            "coverage": 2
+          },
+          "478": {
+            "source": "            bString.indexOf('[object') === -1 &&",
+            "coverage": ""
+          },
+          "479": {
+            "source": "            aString === bString;",
+            "coverage": ""
+          },
+          "480": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "481": {
+            "source": "",
+            "coverage": ""
+          },
+          "482": {
+            "source": "    if (typeof a != 'object' || typeof b != 'object') return false;",
+            "coverage": 4
+          },
+          "483": {
+            "source": "",
+            "coverage": ""
+          },
+          "484": {
+            "source": "    // 简单判断两个对象是否相等，只判断第一层",
+            "coverage": ""
+          },
+          "485": {
+            "source": "    if (isPlainObject(a) && isPlainObject(b)) {",
+            "coverage": 2
+          },
+          "486": {
+            "source": "",
+            "coverage": ""
+          },
+          "487": {
+            "source": "      // 键值不相等，立刻返回 false",
+            "coverage": ""
+          },
+          "488": {
+            "source": "      if (!isEqual(keys(a), keys(b))) {",
+            "coverage": 2
+          },
+          "489": {
+            "source": "        return false;",
+            "coverage": 1
+          },
+          "490": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "491": {
+            "source": "",
+            "coverage": ""
+          },
+          "492": {
+            "source": "      // 键相同，但有值不等，立刻返回 false",
+            "coverage": ""
+          },
+          "493": {
+            "source": "      for (var p in a) {",
+            "coverage": 1
+          },
+          "494": {
+            "source": "        if (a[p] !== b[p]) return false;",
+            "coverage": 2
+          },
+          "495": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "496": {
+            "source": "",
+            "coverage": ""
+          },
+          "497": {
+            "source": "      return true;",
+            "coverage": 0
+          },
+          "498": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "499": {
+            "source": "",
+            "coverage": ""
+          },
+          "500": {
+            "source": "    // 其他情况返回 false, 以避免误判导致 change 事件没发生",
+            "coverage": ""
+          },
+          "501": {
+            "source": "    return false;",
+            "coverage": 0
+          },
+          "502": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "503": {
+            "source": "",
+            "coverage": ""
+          },
+          "504": {
+            "source": "});",
+            "coverage": ""
+          },
+          "505": {
+            "source": "",
+            "coverage": ""
+          }
+        }
+      },
+      {
+        "filename": "src/base.js",
+        "coverage": 100,
+        "hits": 19,
+        "misses": 0,
+        "sloc": 19,
+        "source": {
+          "1": {
+            "source": "define(function(require, exports, module) {",
+            "coverage": 1
+          },
+          "2": {
+            "source": "",
+            "coverage": ""
+          },
+          "3": {
+            "source": "  // Base",
+            "coverage": ""
+          },
+          "4": {
+            "source": "  // ---------",
+            "coverage": ""
+          },
+          "5": {
+            "source": "  // Base 是一个基础类，提供 Class、Events、Attrs 和 Aspect 支持。",
+            "coverage": ""
+          },
+          "6": {
+            "source": "",
+            "coverage": ""
+          },
+          "7": {
+            "source": "  var Class = require('class');",
+            "coverage": 1
+          },
+          "8": {
+            "source": "  var Events = require('events');",
+            "coverage": 1
+          },
+          "9": {
+            "source": "  var Aspect = require('./aspect');",
+            "coverage": 1
+          },
+          "10": {
+            "source": "  var Attribute = require('./attribute');",
+            "coverage": 1
+          },
+          "11": {
+            "source": "",
+            "coverage": ""
+          },
+          "12": {
+            "source": "",
+            "coverage": ""
+          },
+          "13": {
+            "source": "  module.exports = Class.create({",
+            "coverage": 1
+          },
+          "14": {
+            "source": "    Implements: [Events, Aspect, Attribute],",
+            "coverage": ""
+          },
+          "15": {
+            "source": "",
+            "coverage": ""
+          },
+          "16": {
+            "source": "    initialize: function(config) {",
+            "coverage": ""
+          },
+          "17": {
+            "source": "      this.initAttrs(config);",
+            "coverage": 34
+          },
+          "18": {
+            "source": "",
+            "coverage": ""
+          },
+          "19": {
+            "source": "      // Automatically register `this._onChangeAttr` method as",
+            "coverage": ""
+          },
+          "20": {
+            "source": "      // a `change:attr` event handler.",
+            "coverage": ""
+          },
+          "21": {
+            "source": "      parseEventsFromInstance(this, this.attrs);",
+            "coverage": 34
+          },
+          "22": {
+            "source": "    },",
+            "coverage": ""
+          },
+          "23": {
+            "source": "",
+            "coverage": ""
+          },
+          "24": {
+            "source": "    destroy: function() {",
+            "coverage": ""
+          },
+          "25": {
+            "source": "      this.off();",
+            "coverage": 2
+          },
+          "26": {
+            "source": "",
+            "coverage": ""
+          },
+          "27": {
+            "source": "      for (var p in this) {",
+            "coverage": 0
+          },
+          "28": {
+            "source": "        if (this.hasOwnProperty(p)) {",
+            "coverage": 29
+          },
+          "29": {
+            "source": "          delete this[p];",
+            "coverage": 2
+          },
+          "30": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "31": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "32": {
+            "source": "",
+            "coverage": ""
+          },
+          "33": {
+            "source": "      // Destroy should be called only once, generate a fake destroy after called",
+            "coverage": ""
+          },
+          "34": {
+            "source": "      // https://github.com/aralejs/widget/issues/50",
+            "coverage": ""
+          },
+          "35": {
+            "source": "      this.destroy = function() {};",
+            "coverage": 2
+          },
+          "36": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "37": {
+            "source": "  });",
+            "coverage": ""
+          },
+          "38": {
+            "source": "",
+            "coverage": ""
+          },
+          "39": {
+            "source": "",
+            "coverage": ""
+          },
+          "40": {
+            "source": "  function parseEventsFromInstance(host, attrs) {",
+            "coverage": ""
+          },
+          "41": {
+            "source": "    for (var attr in attrs) {",
+            "coverage": 0
+          },
+          "42": {
+            "source": "      if (attrs.hasOwnProperty(attr)) {",
+            "coverage": 61
+          },
+          "43": {
+            "source": "        var m = '_onChange' + ucfirst(attr);",
+            "coverage": 61
+          },
+          "44": {
+            "source": "        if (host[m]) {",
+            "coverage": 61
+          },
+          "45": {
+            "source": "          host.on('change:' + attr, host[m]);",
+            "coverage": 15
+          },
+          "46": {
+            "source": "        }",
+            "coverage": ""
+          },
+          "47": {
+            "source": "      }",
+            "coverage": ""
+          },
+          "48": {
+            "source": "    }",
+            "coverage": ""
+          },
+          "49": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "50": {
+            "source": "",
+            "coverage": ""
+          },
+          "51": {
+            "source": "  function ucfirst(str) {",
+            "coverage": ""
+          },
+          "52": {
+            "source": "    return str.charAt(0).toUpperCase() + str.substring(1);",
+            "coverage": 61
+          },
+          "53": {
+            "source": "  }",
+            "coverage": ""
+          },
+          "54": {
+            "source": "});",
+            "coverage": ""
+          },
+          "55": {
+            "source": "",
+            "coverage": ""
+          }
+        }
+      }
+    ],
+    "stats": {
+      "suites": 1,
+      "tests": 32,
+      "passes": 32,
+      "pending": 0,
+      "failures": 0,
+      "start": "2013-08-19T07:56:38.650Z",
+      "end": "2013-08-19T07:56:38.747Z",
+      "duration": 97
+    },
+    "tests": [
+      {
+        "title": "normal usage",
+        "fullTitle": "Base normal usage",
+        "duration": 2
+      },
+      {
+        "title": "events supporting",
+        "fullTitle": "Base events supporting",
+        "duration": 2
+      },
+      {
+        "title": "attrs merging",
+        "fullTitle": "Base attrs merging",
+        "duration": 3
+      },
+      {
+        "title": "attrs cloning",
+        "fullTitle": "Base attrs cloning",
+        "duration": 2
+      },
+      {
+        "title": "events declaration in config",
+        "fullTitle": "Base events declaration in config",
+        "duration": 3
+      },
+      {
+        "title": "attrs from ancestors",
+        "fullTitle": "Base attrs from ancestors",
+        "duration": 3
+      },
+      {
+        "title": "alipay/arale#49: deep clone bug in initAttrs",
+        "fullTitle": "Base alipay/arale#49: deep clone bug in initAttrs",
+        "duration": 1
+      },
+      {
+        "title": "attrs: normal usage",
+        "fullTitle": "Base attrs: normal usage",
+        "duration": 2
+      },
+      {
+        "title": "attrs: inherited ones",
+        "fullTitle": "Base attrs: inherited ones",
+        "duration": 2
+      },
+      {
+        "title": "related attrs",
+        "fullTitle": "Base related attrs",
+        "duration": 8
+      },
+      {
+        "title": "related attrs change events",
+        "fullTitle": "Base related attrs change events",
+        "duration": 2
+      },
+      {
+        "title": "attrs change events",
+        "fullTitle": "Base attrs change events",
+        "duration": 5
+      },
+      {
+        "title": "example in attribute.md",
+        "fullTitle": "Base example in attribute.md",
+        "duration": 2
+      },
+      {
+        "title": "aspect",
+        "fullTitle": "Base aspect",
+        "duration": 3
+      },
+      {
+        "title": "prevent before event",
+        "fullTitle": "Base prevent before event",
+        "duration": 7
+      },
+      {
+        "title": "test change method",
+        "fullTitle": "Base test change method",
+        "duration": 4
+      },
+      {
+        "title": "after/before support binding multiple methodNames at once",
+        "fullTitle": "Base after/before support binding multiple methodNames at once",
+        "duration": 1
+      },
+      {
+        "title": "special properties getter",
+        "fullTitle": "Base special properties getter",
+        "duration": 1
+      },
+      {
+        "title": "#2 share instance",
+        "fullTitle": "Base #2 share instance",
+        "duration": 2
+      },
+      {
+        "title": "#3 attrs can not be { value: 1 }",
+        "fullTitle": "Base #3 attrs can not be { value: 1 }",
+        "duration": 0
+      },
+      {
+        "title": "#4 the merging bug of jQuery-like object",
+        "fullTitle": "Base #4 the merging bug of jQuery-like object",
+        "duration": 1
+      },
+      {
+        "title": "#16 after callback should pass arguments from method",
+        "fullTitle": "Base #16 after callback should pass arguments from method",
+        "duration": 1
+      },
+      {
+        "title": "destroy",
+        "fullTitle": "Base destroy",
+        "duration": 1
+      },
+      {
+        "title": "can not set readOnly attr",
+        "fullTitle": "Base can not set readOnly attr",
+        "duration": 4
+      },
+      {
+        "title": "attr can be overrided",
+        "fullTitle": "Base attr can be overrided",
+        "duration": 2
+      },
+      {
+        "title": "change silent attr manually",
+        "fullTitle": "Base change silent attr manually",
+        "duration": 1
+      },
+      {
+        "title": "other attr format",
+        "fullTitle": "Base other attr format",
+        "duration": 1
+      },
+      {
+        "title": "attr moment",
+        "fullTitle": "Base attr moment",
+        "duration": 3
+      },
+      {
+        "title": "isPlainObject #19",
+        "fullTitle": "Base isPlainObject #19",
+        "duration": 0
+      },
+      {
+        "title": "setter need userValue",
+        "fullTitle": "Base setter need userValue",
+        "duration": 1
+      },
+      {
+        "title": "destroy once",
+        "fullTitle": "Base destroy once",
+        "duration": 1
+      },
+      {
+        "title": "isEmptyObject #22",
+        "fullTitle": "Base isEmptyObject #22",
+        "duration": 12
+      }
+    ],
+    "failures": [],
+    "passes": [
+      {
+        "title": "normal usage",
+        "fullTitle": "Base normal usage",
+        "duration": 2
+      },
+      {
+        "title": "events supporting",
+        "fullTitle": "Base events supporting",
+        "duration": 2
+      },
+      {
+        "title": "attrs merging",
+        "fullTitle": "Base attrs merging",
+        "duration": 3
+      },
+      {
+        "title": "attrs cloning",
+        "fullTitle": "Base attrs cloning",
+        "duration": 2
+      },
+      {
+        "title": "events declaration in config",
+        "fullTitle": "Base events declaration in config",
+        "duration": 3
+      },
+      {
+        "title": "attrs from ancestors",
+        "fullTitle": "Base attrs from ancestors",
+        "duration": 3
+      },
+      {
+        "title": "alipay/arale#49: deep clone bug in initAttrs",
+        "fullTitle": "Base alipay/arale#49: deep clone bug in initAttrs",
+        "duration": 1
+      },
+      {
+        "title": "attrs: normal usage",
+        "fullTitle": "Base attrs: normal usage",
+        "duration": 2
+      },
+      {
+        "title": "attrs: inherited ones",
+        "fullTitle": "Base attrs: inherited ones",
+        "duration": 2
+      },
+      {
+        "title": "related attrs",
+        "fullTitle": "Base related attrs",
+        "duration": 8
+      },
+      {
+        "title": "related attrs change events",
+        "fullTitle": "Base related attrs change events",
+        "duration": 2
+      },
+      {
+        "title": "attrs change events",
+        "fullTitle": "Base attrs change events",
+        "duration": 5
+      },
+      {
+        "title": "example in attribute.md",
+        "fullTitle": "Base example in attribute.md",
+        "duration": 2
+      },
+      {
+        "title": "aspect",
+        "fullTitle": "Base aspect",
+        "duration": 3
+      },
+      {
+        "title": "prevent before event",
+        "fullTitle": "Base prevent before event",
+        "duration": 7
+      },
+      {
+        "title": "test change method",
+        "fullTitle": "Base test change method",
+        "duration": 4
+      },
+      {
+        "title": "after/before support binding multiple methodNames at once",
+        "fullTitle": "Base after/before support binding multiple methodNames at once",
+        "duration": 1
+      },
+      {
+        "title": "special properties getter",
+        "fullTitle": "Base special properties getter",
+        "duration": 1
+      },
+      {
+        "title": "#2 share instance",
+        "fullTitle": "Base #2 share instance",
+        "duration": 2
+      },
+      {
+        "title": "#3 attrs can not be { value: 1 }",
+        "fullTitle": "Base #3 attrs can not be { value: 1 }",
+        "duration": 0
+      },
+      {
+        "title": "#4 the merging bug of jQuery-like object",
+        "fullTitle": "Base #4 the merging bug of jQuery-like object",
+        "duration": 1
+      },
+      {
+        "title": "#16 after callback should pass arguments from method",
+        "fullTitle": "Base #16 after callback should pass arguments from method",
+        "duration": 1
+      },
+      {
+        "title": "destroy",
+        "fullTitle": "Base destroy",
+        "duration": 1
+      },
+      {
+        "title": "can not set readOnly attr",
+        "fullTitle": "Base can not set readOnly attr",
+        "duration": 4
+      },
+      {
+        "title": "attr can be overrided",
+        "fullTitle": "Base attr can be overrided",
+        "duration": 2
+      },
+      {
+        "title": "change silent attr manually",
+        "fullTitle": "Base change silent attr manually",
+        "duration": 1
+      },
+      {
+        "title": "other attr format",
+        "fullTitle": "Base other attr format",
+        "duration": 1
+      },
+      {
+        "title": "attr moment",
+        "fullTitle": "Base attr moment",
+        "duration": 3
+      },
+      {
+        "title": "isPlainObject #19",
+        "fullTitle": "Base isPlainObject #19",
+        "duration": 0
+      },
+      {
+        "title": "setter need userValue",
+        "fullTitle": "Base setter need userValue",
+        "duration": 1
+      },
+      {
+        "title": "destroy once",
+        "fullTitle": "Base destroy once",
+        "duration": 1
+      },
+      {
+        "title": "isEmptyObject #22",
+        "fullTitle": "Base isEmptyObject #22",
+        "duration": 12
+      }
+    ]
+  }
+]
