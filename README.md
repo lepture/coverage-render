@@ -7,7 +7,7 @@ Combine coverages into one coverage.
 
 Install it with npm:
 
-    $ npm install mocha-render
+    $ npm install coverage-render
 
 ## Usage
 
@@ -17,7 +17,7 @@ coverages.push(cov1);
 coverages.push(cov2);
 // ...
 
-var render = require('mocha-render');
+var render = require('coverage-render');
 var html = render(coverages);
 process.stdout.write(html);
 ```
@@ -25,7 +25,7 @@ process.stdout.write(html);
 ## API
 
 ```
-var render = require('mocha-render');
+var render = require('coverage-render');
 ```
 
 ### render(coverages)
